@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand-yellow: #FFB800;
+  --color-brand-yellow-hover: #E5A600;
+  --color-brand-dark: #121212;
+  --color-brand-darker: #0A0A0A;
+  --color-brand-card: #1A1A1A;
+  --color-brand-text: #E5E5E5;
+  --color-brand-muted: #888888;
+}
+
+@layer base {
+  body {
+    @apply bg-brand-dark text-brand-text font-sans antialiased overflow-x-hidden;
+  }
+}

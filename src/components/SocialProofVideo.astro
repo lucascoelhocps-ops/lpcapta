@@ -1,0 +1,38 @@
+---
+// SocialProofVideo.astro
+---
+<section class="py-24 bg-brand-dark border-t border-white/5">
+  <div class="max-w-6xl mx-auto px-4 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+    
+    <!-- Video Wrapper -->
+    <div class="relative rounded-2xl overflow-hidden aspect-video bg-black shadow-2xl border border-white/10 group cursor-pointer">
+      <div class="absolute inset-0 bg-brand-dark/40 group-hover:bg-brand-dark/20 transition-colors z-10 flex items-center justify-center">
+        <!-- Play Button -->
+        <div class="w-20 h-20 bg-brand-yellow rounded-full flex items-center justify-center pl-2 shadow-[0_0_20px_rgba(255,184,0,0.6)] transform group-hover:scale-110 transition-transform duration-300">
+           <svg class="w-8 h-8 text-brand-dark" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path></svg>
+        </div>
+      </div>
+      <!-- Placeholder image for video thumbnail -->
+      <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?auto=format&fit=crop&w=800&q=80" alt="Mensagem do CEO" class="w-full h-full object-cover opacity-60" />
+    </div>
+
+    <!-- Testimonial Content -->
+    <div>
+      <h2 class="text-3xl md:text-4xl font-bold text-white mb-6 leading-tight">Um número para comemorar com os +10.000 Afiliados</h2>
+      <p class="text-brand-text/80 text-lg mb-8 leading-relaxed">
+        "Nossa missão nos últimos 2 anos foi dar justiça e poder ao afiliado. Quando você começa a ver o retorno sobre investimento (ROI) verdadeiro porque a Ratoeira está barrando os robôs... O jogo muda."
+      </p>
+      
+      <div class="flex items-center gap-4">
+        <div class="w-14 h-14 bg-white/10 rounded-full overflow-hidden border border-brand-yellow/30">
+          <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?auto=format&fit=crop&w=150&q=80" alt="CEO" class="w-full h-full object-cover mix-blend-luminosity hover:mix-blend-normal transition-all" />
+        </div>
+        <div>
+          <h4 class="font-bold text-white">Nome do CEO</h4>
+          <span class="text-xs text-brand-yellow uppercase tracking-widest font-semibold">Founder, Ratoeira Ads</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
