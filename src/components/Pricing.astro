@@ -1,90 +1,314 @@
----
-// Pricing.astro
----
-<section id="planos" class="py-24 bg-brand-light relative z-20">
+<section id="planos" class="py-24 bg-brand-light relative z-20 overflow-hidden">
   <div class="max-w-7xl mx-auto px-4">
     <div class="text-center mb-16">
-      <div class="inline-flex items-center justify-center bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide uppercase mb-4 shadow-[0_0_15px_rgba(255,184,0,0.15)]">
+      <div class="inline-flex items-center justify-center bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow px-4 py-1.5 rounded-full text-xs font-black tracking-wide uppercase mb-6 shadow-[0_0_20px_rgba(255,184,0,0.2)]">
         Oferta de Aniversário
       </div>
-      <h2 class="text-3xl md:text-5xl font-extrabold text-brand-dark mb-4 tracking-tight">Escolha seu plano Ratoeira Ads</h2>
-      <p class="text-lg text-brand-text/80 max-w-2xl mx-auto">Garanta a melhor condição da nossa história e tenha o controle total das suas campanhas.</p>
+      <h2 class="text-4xl md:text-6xl font-black text-brand-dark mb-4 tracking-tight">Escolha seu plano Ratoeira</h2>
+      <p class="text-lg text-brand-text/70 max-w-2xl mx-auto mb-10">O bueiro está aberto. Garanta sua proteção agora.</p>
+
+      <!-- Step 1: Oferta Selector -->
+      <div class="flex flex-col items-center mb-10">
+        <span class="text-[10px] uppercase font-black text-brand-text/30 tracking-[0.2em] mb-4">ETAPA 1 — SELECIONE SUA ESTRATÉGIA</span>
+        <div class="bg-gray-100 p-1.5 rounded-3xl flex gap-1 border border-black/5 shadow-inner w-full max-w-md mx-auto">
+          <button 
+            data-bundle-trigger="ads" 
+            class="bundle-btn active flex-1 py-4 px-6 rounded-2xl text-sm font-black transition-all duration-300"
+          >
+            SÓ ADS
+          </button>
+          <button 
+            data-bundle-trigger="combo" 
+            class="bundle-btn flex-1 py-4 px-6 rounded-2xl text-sm font-black transition-all duration-300 relative group"
+          >
+            ADS + PAGES 
+            <span class="absolute -top-3 -right-3 bg-red-600 text-white text-[9px] px-2 py-1 rounded-full animate-bounce shadow-lg uppercase font-black">Melhor Valor</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Step 2: Period Selector -->
+      <div class="flex flex-col items-center mb-16">
+        <span class="text-[10px] uppercase font-black text-brand-text/30 tracking-[0.2em] mb-4">ETAPA 2 — DEFINA O PERÍODO</span>
+        <div class="bg-white p-1 rounded-full flex gap-1 border border-brand-yellow/20 shadow-sm">
+          <button 
+            data-period-trigger="anual" 
+            class="period-btn active px-8 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300"
+          >
+            Anual
+          </button>
+          <button 
+            data-period-trigger="semestral" 
+            class="period-btn px-8 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300"
+          >
+            Semestral
+          </button>
+          <button 
+            data-period-trigger="mensal" 
+            class="period-btn px-8 py-2.5 rounded-full text-xs font-black uppercase tracking-widest transition-all duration-300"
+          >
+            Mensal
+          </button>
+        </div>
+      </div>
     </div>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+    <!-- Pricing Content -->
+    <div class="pricing-content relative min-h-[600px]">
       
-      <!-- Plano Especial -->
-      <div class="relative bg-brand-card rounded-2xl p-8 border border-black/5 hover:border-brand-yellow/60 transition-all duration-300 flex flex-col group hover:shadow-[0_10px_40px_rgba(0,0,0,0.1)]">
-        <h3 class="text-2xl font-bold text-brand-dark mb-2">Plano Anual Especial</h3>
-        <p class="text-brand-text/60 mb-6 text-sm">O essencial para afiliados que querem blindar suas vendas.</p>
+      <!-- BUNDLE: ADS ONLY -->
+      <div data-bundle-group="ads" class="bundle-group transition-all duration-500">
         
-        <div class="mb-6">
-          <span class="text-xs text-brand-text/40 line-through uppercase tracking-wider block mb-1">De R$ [PREÇO_ANTIGO]</span>
-          <div class="flex items-end gap-2 text-brand-dark">
-            <span class="text-lg font-bold">12x</span>
-            <span class="text-5xl font-extrabold text-brand-yellow drop-shadow-[0_0_1px_rgba(0,0,0,0.1)]">R$ [VALOR_1]</span>
+        <!-- Period: Anual (Ads Only) -->
+        <div data-period-group="anual" class="period-group grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto items-center">
+          <!-- Rato -->
+          <div class="relative bg-white rounded-[40px] p-10 md:p-12 border-2 border-brand-yellow/10 hover:border-brand-yellow/30 transition-all flex flex-col group shadow-xl">
+            <h3 class="text-3xl font-black text-brand-dark mb-2">Plano Rato <span class="text-brand-yellow text-sm font-bold ml-1">Ads Anual</span></h3>
+            <p class="text-brand-text/60 mb-8 text-sm leading-relaxed">Proteção básica e eficiente para quem está começando.</p>
+            <div class="mb-10">
+              <span class="text-xs text-brand-text/40 line-through block mb-1">De R$ [PRECO_NORMAL]</span>
+              <div class="flex items-baseline gap-2 text-brand-dark">
+                <span class="text-sm font-black opacity-40">12x</span>
+                <span class="text-6xl font-black text-brand-yellow tracking-tighter">R$ [VALOR]</span>
+              </div>
+            </div>
+            <ul class="space-y-4 mb-12 grow text-sm font-bold">
+              <li class="flex items-center gap-3 text-brand-dark"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Blindagem Ratoeira Ads</li>
+              <li class="flex items-center gap-3 text-brand-dark"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Suporte em Horário Comercial</li>
+            </ul>
+            <a href="#checkout-ads-anual-rato" class="w-full text-center bg-brand-dark text-white py-5 rounded-[20px] font-black uppercase text-sm tracking-widest shadow-lg shadow-black/10 hover:bg-black transition-all">PEGAR PLANO RATO</a>
           </div>
-          <span class="text-brand-text/60 text-sm mt-1 block">ou R$ [VISTA_1] à vista</span>
+          <!-- Ratazana -->
+          <div class="relative bg-white rounded-[40px] p-10 md:p-12 border-2 border-brand-yellow shadow-2xl z-10 md:-translate-y-4 flex flex-col">
+            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-brand-yellow text-brand-dark px-6 py-2 rounded-full text-xs font-black shadow-[0_5px_20px_rgba(255,184,0,0.4)]">RECOMENDADO</div>
+            <h3 class="text-3xl font-black text-brand-dark mb-2">Plano Ratazana <span class="text-brand-yellow text-sm font-bold ml-1">Ads Anual</span></h3>
+            <p class="text-brand-text/60 mb-8 text-sm leading-relaxed">Escala máxima para quem busca proteção ilimitada.</p>
+            <div class="mb-10">
+              <span class="text-xs text-brand-text/40 line-through block mb-1">De R$ [PRECO_NORMAL]</span>
+              <div class="flex items-baseline gap-2 text-brand-dark">
+                <span class="text-sm font-black opacity-40">12x</span>
+                <span class="text-6xl font-black text-brand-yellow tracking-tighter">R$ [VALOR]</span>
+              </div>
+            </div>
+            <ul class="space-y-4 mb-12 grow text-sm font-bold">
+              <li class="flex items-center gap-3 text-brand-dark"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Domínios/Cliques Ilimitados</li>
+              <li class="flex items-center gap-3 text-brand-dark"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Suporte Prioritário VIP</li>
+            </ul>
+            <a href="#checkout-ads-anual-ratazana" class="w-full text-center bg-brand-yellow text-brand-dark py-5 rounded-[20px] font-black uppercase text-sm tracking-widest shadow-lg shadow-brand-yellow/30 hover:scale-[1.02] transition-all">GARANTIR PLANO RATAZANA</a>
+          </div>
         </div>
 
-        <ul class="space-y-4 mb-8 flex-grow">
-          <li class="flex items-start gap-3 text-brand-text/90 text-sm">
-            <svg class="w-5 h-5 text-brand-yellow mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            Bloqueio de Ips falsos e concorrentes
-          </li>
-          <li class="flex items-start gap-3 text-brand-text/90 text-sm">
-            <svg class="w-5 h-5 text-brand-yellow mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            Integração nativa Google Ads
-          </li>
-          <li class="flex items-start gap-3 text-brand-text/90 text-sm">
-            <svg class="w-5 h-5 text-brand-yellow mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            Até 10 domínios / 30.000 cliques
-          </li>
-        </ul>
+        <!-- Period: Semestral (Ads Only) -->
+        <div data-period-group="semestral" class="period-group grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+           <div class="bg-white rounded-[40px] p-10 border-2 border-brand-yellow/10 flex flex-col">
+             <h3 class="text-2xl font-black text-brand-dark mb-2">Plano Rato <span class="text-brand-yellow text-sm font-bold ml-1">Semestral</span></h3>
+             <div class="my-8">
+               <span class="text-5xl font-black text-brand-yellow tracking-tighter">R$ [VALOR]</span>
+             </div>
+             <a href="#checkout-ads-semestral-rato" class="w-full bg-brand-dark text-white py-4 rounded-2xl font-black text-sm uppercase tracking-widest text-center">ASSINAR AGORA</a>
+           </div>
+           <div class="bg-white rounded-[40px] p-10 border-2 border-brand-yellow flex flex-col">
+             <h3 class="text-2xl font-black text-brand-dark mb-2">Plano Ratazana <span class="text-brand-yellow text-sm font-bold ml-1">Semestral</span></h3>
+             <div class="my-8">
+               <span class="text-5xl font-black text-brand-yellow tracking-tighter">R$ [VALOR]</span>
+             </div>
+             <a href="#checkout-ads-semestral-ratazana" class="w-full bg-brand-yellow text-brand-dark py-4 rounded-2xl font-black text-sm uppercase tracking-widest text-center shadow-lg shadow-brand-yellow/20">GARANTIR PLANO</a>
+           </div>
+        </div>
 
-        <a href="#checkout-link-1" class="w-full text-center bg-transparent border border-gray-200 hover:bg-brand-yellow hover:border-brand-yellow hover:text-brand-dark text-brand-dark font-bold py-3 px-4 rounded-lg transition-colors duration-300 group-hover:ring-brand-yellow/50">
-          ASSINAR AGORA
-        </a>
+        <!-- Period: Mensal (Ads Only) -->
+        <div data-period-group="mensal" class="period-group grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+           <div class="bg-white rounded-3xl p-8 border-2 border-brand-yellow/5 flex flex-col font-black">
+             <h3 class="text-xl text-brand-dark">Camundongo <span class="text-[10px] opacity-40 block uppercase mt-1">Ads Mensal</span></h3>
+             <span class="text-3xl text-brand-yellow my-6">R$ [VALOR]</span>
+             <a href="#checkout-ads-mensal-camundongo" class="w-full border-2 border-brand-dark py-3 rounded-xl text-xs uppercase tracking-widest text-center hover:bg-brand-dark hover:text-white transition-all">ASSINAR</a>
+           </div>
+           <div class="bg-white rounded-3xl p-8 border-2 border-brand-yellow/5 flex flex-col font-black">
+             <h3 class="text-xl text-brand-dark">Rato <span class="text-[10px] opacity-40 block uppercase mt-1">Ads Mensal</span></h3>
+             <span class="text-3xl text-brand-yellow my-6">R$ [VALOR]</span>
+             <a href="#checkout-ads-mensal-rato" class="w-full border-2 border-brand-dark py-3 rounded-xl text-xs uppercase tracking-widest text-center hover:bg-brand-dark hover:text-white transition-all">ASSINAR</a>
+           </div>
+           <div class="bg-white rounded-3xl p-8 border-2 border-brand-yellow flex flex-col font-black shadow-xl">
+             <h3 class="text-xl text-brand-dark">Ratazana <span class="text-[10px] opacity-40 block uppercase mt-1">Ads Mensal</span></h3>
+             <span class="text-3xl text-brand-yellow my-6">R$ [VALOR]</span>
+             <a href="#checkout-ads-mensal-ratazana" class="w-full bg-brand-yellow text-brand-dark py-3 rounded-xl text-xs uppercase tracking-widest text-center shadow-lg shadow-brand-yellow/20">ASSINAR</a>
+           </div>
+        </div>
       </div>
 
-      <!-- Plano Plus (Highlight) -->
-      <div class="relative bg-gradient-to-br from-white to-gray-50 rounded-2xl p-8 border border-brand-yellow flex flex-col transform md:-translate-y-4 shadow-[0_20px_50px_rgba(255,184,0,0.1)] z-10">
-        <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-brand-yellow text-brand-dark px-4 py-1 rounded-full text-sm font-extrabold tracking-widest shadow-[0_0_15px_rgba(255,184,0,0.2)]">
-          MAIS ESCOLHIDO
-        </div>
+      <!-- BUNDLE: ADS + PAGES (COMBO) -->
+      <div data-bundle-group="combo" class="bundle-group transition-all duration-500">
         
-        <h3 class="text-2xl font-bold text-brand-dark mb-2">Plano Plus Anual</h3>
-        <p class="text-brand-text/60 mb-6 text-sm">Completo. Para quem quer a estrutura blindada no nível máximo.</p>
-        
-        <div class="mb-6">
-          <span class="text-xs text-brand-text/40 line-through uppercase tracking-wider block mb-1">De R$ [PREÇO_ANTIGO]</span>
-          <div class="flex items-end gap-2 text-brand-dark">
-            <span class="text-lg font-bold">12x</span>
-            <span class="text-5xl font-extrabold text-brand-yellow drop-shadow-[0_0_2px_rgba(0,0,0,0.1)]">R$ [VALOR_2]</span>
+        <!-- COMBO ANUAL -->
+        <div data-period-group="anual" class="period-group grid grid-cols-1 md:grid-cols-2 gap-10 max-w-5xl mx-auto transition-all duration-500">
+          <!-- Combo Rato -->
+          <div class="relative bg-white rounded-[40px] p-10 md:p-12 border-2 border-brand-yellow transition-all flex flex-col group shadow-2xl">
+            <div class="absolute -top-4 -left-4 bg-black text-brand-yellow text-[11px] px-4 py-2 font-black rounded-xl transform -rotate-12 border border-brand-yellow shadow-2xl z-20">GRANDE OFERTA</div>
+            <h3 class="text-3xl font-black text-brand-dark mb-2">Combo Rato <span class="text-brand-yellow text-sm font-bold ml-1">Anual</span></h3>
+            <p class="text-brand-text/60 mb-8 text-sm leading-relaxed">Proteção Ads completa + Pack de Páginas que convertem.</p>
+            <div class="mb-10">
+              <span class="text-xs text-brand-text/40 line-through block mb-1">De R$ [PRECO_NORMAL]</span>
+              <div class="flex items-baseline gap-2 text-brand-dark">
+                <span class="text-sm font-black opacity-40">12x</span>
+                <span class="text-6xl font-black text-brand-yellow tracking-tighter">R$ [VALOR]</span>
+              </div>
+            </div>
+            <ul class="space-y-4 mb-12 grow text-sm font-bold">
+              <li class="flex items-center gap-3 text-brand-dark"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Blindagem Ratoeira Ads</li>
+              <li class="flex items-center gap-3 text-brand-dark"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Ratoeira Pages Incluso</li>
+              <li class="flex items-center gap-3 text-brand-dark"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Templates de Alta Conversão</li>
+            </ul>
+            <a href="#checkout-combo-anual-rato" class="w-full text-center bg-brand-dark text-white py-5 rounded-[20px] font-black uppercase text-sm tracking-widest shadow-lg shadow-black/10 hover:bg-black transition-all">PEGAR COMBO ANUAL</a>
           </div>
-          <span class="text-brand-text/60 text-sm mt-1 block">ou R$ [VISTA_2] à vista</span>
+
+          <!-- Combo Ratazana -->
+          <div class="relative bg-black rounded-[40px] p-10 md:p-12 border-2 border-brand-yellow flex flex-col group text-white shadow-[0_35px_60px_-15px_rgba(0,0,0,0.3)]">
+            <div class="absolute top-6 right-6">
+              <span class="bg-brand-yellow text-brand-dark text-[10px] font-black px-3 py-1.5 rounded uppercase tracking-tighter shadow-lg">ULTRA ECONOMIA</span>
+            </div>
+            <h3 class="text-3xl font-black mb-2 text-white">Combo Ratazana <span class="text-brand-yellow text-sm font-bold ml-1">Anual</span></h3>
+            <p class="text-white/50 mb-8 text-sm leading-relaxed">O arsenal completo. Nada vai te segurar agora.</p>
+            <div class="mb-10">
+              <span class="text-xs text-white/30 line-through block mb-1">De R$ [PRECO_NORMAL]</span>
+              <div class="flex items-baseline gap-2">
+                <span class="text-sm font-black opacity-40">12x</span>
+                <span class="text-6xl font-black text-brand-yellow tracking-tighter">R$ [VALOR]</span>
+              </div>
+            </div>
+            <ul class="space-y-4 mb-12 grow text-sm font-bold">
+              <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Ads Ilimitado</li>
+              <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Pages Ilimitadas</li>
+              <li class="flex items-center gap-3"><svg class="w-5 h-5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/></svg> Suporte Prioritário 24/7</li>
+            </ul>
+            <a href="#checkout-combo-anual-ratazana" class="w-full text-center bg-brand-yellow text-brand-dark py-5 rounded-[20px] font-black uppercase text-sm tracking-widest shadow-2xl shadow-brand-yellow/40 hover:scale-[1.02] transition-all">QUERO O COMBO COMPLETO</a>
+          </div>
         </div>
 
-        <ul class="space-y-4 mb-8 flex-grow">
-          <li class="flex items-start gap-3 text-brand-dark text-sm font-medium">
-            <svg class="w-5 h-5 text-brand-yellow mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            Tudo do plano Especial
-          </li>
-          <li class="flex items-start gap-3 text-brand-dark text-sm font-medium">
-            <svg class="w-5 h-5 text-brand-yellow mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            Até 25 domínios / Ilimitado cliques
-          </li>
-          <li class="flex items-start gap-3 text-brand-yellow font-bold text-sm">
-            <svg class="w-5 h-5 text-brand-yellow mt-0.5 flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-            Suporte VIP WhatsApp
-          </li>
-        </ul>
+        <!-- COMBO SEMESTRAL -->
+        <div data-period-group="semestral" class="period-group grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+           <div class="bg-white rounded-[40px] p-10 border-2 border-brand-yellow/10 flex flex-col text-center font-black">
+             <h3 class="text-2xl text-brand-dark mb-2">Combo Rato <span class="text-brand-yellow text-xs ml-1 uppercase">Semestral</span></h3>
+             <span class="text-5xl text-brand-yellow my-8 tracking-tighter">R$ [VALOR]</span>
+             <a href="#checkout-combo-semestral-rato" class="w-full bg-brand-dark text-white py-4 rounded-2xl uppercase text-xs tracking-widest">ASSINAR COMBO</a>
+           </div>
+           <div class="bg-white rounded-[40px] p-10 border-2 border-brand-yellow flex flex-col text-center font-black shadow-xl">
+             <h3 class="text-2xl text-brand-dark mb-2">Combo Ratazana <span class="text-brand-yellow text-xs ml-1 uppercase">Semestral</span></h3>
+             <span class="text-5xl text-brand-yellow my-8 tracking-tighter">R$ [VALOR]</span>
+             <a href="#checkout-combo-semestral-ratazana" class="w-full bg-brand-yellow text-brand-dark py-4 rounded-2xl uppercase text-xs tracking-widest shadow-lg shadow-brand-yellow/20">ASSINAR COMBO</a>
+           </div>
+        </div>
 
-        <a href="#checkout-link-2" class="w-full text-center bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark font-extrabold py-4 px-4 rounded-lg transition-transform duration-300 hover:-translate-y-1 shadow-[0_5px_20px_rgba(255,184,0,0.3)]">
-          GARANTIR PLANO PLUS
-        </a>
+        <!-- COMBO MENSAL -->
+        <div data-period-group="mensal" class="period-group grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+           <div class="bg-white rounded-3xl p-8 border-2 border-brand-yellow/5 flex flex-col text-center font-black">
+             <h3 class="text-lg text-brand-dark">Combo Camundongo <span class="text-[10px] block opacity-40 uppercase mt-1">Mensal</span></h3>
+             <span class="text-3xl text-brand-yellow my-6">R$ [VALOR]</span>
+             <a href="#checkout-combo-mensal-camundongo" class="w-full border-2 border-brand-dark py-2.5 rounded-xl text-[10px] uppercase tracking-widest">ASSINAR</a>
+           </div>
+           <div class="bg-white rounded-3xl p-8 border-2 border-brand-yellow/5 flex flex-col text-center font-black">
+             <h3 class="text-lg text-brand-dark">Combo Rato <span class="text-[10px] block opacity-40 uppercase mt-1">Mensal</span></h3>
+             <span class="text-3xl text-brand-yellow my-6">R$ [VALOR]</span>
+             <a href="#checkout-combo-mensal-rato" class="w-full border-2 border-brand-dark py-2.5 rounded-xl text-[10px] uppercase tracking-widest">ASSINAR</a>
+           </div>
+           <div class="bg-white rounded-3xl p-8 border-2 border-brand-yellow flex flex-col text-center font-black shadow-xl">
+             <h3 class="text-lg text-brand-dark">Combo Ratazana <span class="text-[10px] block opacity-40 uppercase mt-1">Mensal</span></h3>
+             <span class="text-3xl text-brand-yellow my-6">R$ [VALOR]</span>
+             <a href="#checkout-combo-mensal-ratazana" class="w-full bg-brand-yellow text-brand-dark py-2.5 rounded-xl text-[10px] uppercase tracking-widest shadow-lg shadow-brand-yellow/20">ASSINAR</a>
+           </div>
+        </div>
       </div>
-
+      
     </div>
   </div>
 </section>
+
+<style>
+  @reference "../styles/global.css";
+
+  /* Buttons Styling */
+  .bundle-btn, .period-btn {
+    @apply text-brand-text/40 hover:text-brand-dark transition-all duration-300;
+  }
+  .bundle-btn.active {
+    @apply bg-white text-brand-dark shadow-[0_10px_30px_rgba(0,0,0,0.08)] ring-1 ring-black/5;
+  }
+  .period-btn.active {
+    @apply bg-brand-yellow text-brand-dark shadow-xl shadow-brand-yellow/20;
+  }
+
+  /* Visibility Management */
+  .bundle-group, .period-group {
+    @apply opacity-100 scale-100;
+  }
+</style>
+
+<script>
+  function initPricing() {
+    const bundleBtns = document.querySelectorAll('[data-bundle-trigger]');
+    const periodBtns = document.querySelectorAll('[data-period-trigger]');
+    const bundleGroups = document.querySelectorAll('[data-bundle-group]');
+
+    let currentBundle = 'ads';
+    let currentPeriod = 'anual';
+
+    function updateView() {
+      // 1. Filter Bundle
+      bundleGroups.forEach(group => {
+        const el = group as HTMLElement;
+        if (el.getAttribute('data-bundle-group') === currentBundle) {
+          el.style.display = 'block';
+          el.classList.remove('opacity-0', 'scale-95');
+        } else {
+          el.style.display = 'none';
+          el.classList.add('opacity-0', 'scale-95');
+        }
+      });
+
+      // 2. Filter Period within active Bundle
+      const activeBundle = document.querySelector(`[data-bundle-group="${currentBundle}"]`) as HTMLElement;
+      if (activeBundle) {
+        const pGroups = activeBundle.querySelectorAll('[data-period-group]');
+        pGroups.forEach(pg => {
+          const el = pg as HTMLElement;
+          if (el.getAttribute('data-period-group') === currentPeriod) {
+            el.style.display = 'grid';
+            el.classList.remove('opacity-0', 'scale-95');
+          } else {
+            el.style.display = 'none';
+            el.classList.add('opacity-0', 'scale-95');
+          }
+        });
+      }
+    }
+
+    // Bundle Listeners
+    bundleBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-bundle-trigger');
+        if (val) currentBundle = val;
+        bundleBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateView();
+      });
+    });
+
+    // Period Listeners
+    periodBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const val = btn.getAttribute('data-period-trigger');
+        if (val) currentPeriod = val;
+        periodBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        updateView();
+      });
+    });
+
+    // Run initial update
+    updateView();
+  }
+
+  // Initial load
+  initPricing();
+  // Support for Astro Page Transitions
+  document.addEventListener('astro:after-swap', initPricing);
+</script>
