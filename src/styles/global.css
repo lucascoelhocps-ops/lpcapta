@@ -3,15 +3,17 @@
 @theme {
   --color-brand-yellow: #FFB800;
   --color-brand-yellow-hover: #E5A600;
-  --color-brand-dark: #121212;
+  --color-brand-dark: #171717;
   --color-brand-darker: #0A0A0A;
-  --color-brand-card: #1A1A1A;
-  --color-brand-text: #E5E5E5;
-  --color-brand-muted: #888888;
+  --color-brand-light: #FFFFFF;
+  --color-brand-lighter: #F9FAFB;
+  --color-brand-card: #FFFFFF;
+  --color-brand-text: #171717;
+  --color-brand-muted: #6B7280;
 }
 
 @layer base {
   body {
-    @apply bg-brand-dark text-brand-text font-sans antialiased overflow-x-hidden;
+    @apply bg-brand-light text-brand-text font-sans antialiased overflow-x-hidden;
   }
 }
