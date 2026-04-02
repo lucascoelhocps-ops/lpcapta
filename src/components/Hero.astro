@@ -1,192 +1,353 @@
 ---
 // Hero.astro
 ---
-<section class="relative w-full min-h-screen pt-32 pb-48 flex items-center bg-brand-light overflow-x-hidden">
-  
+
+<section
+  class="relative w-full h-screen flex items-center bg-brand-light overflow-hidden"
+>
   <!-- Subtle light gradient & overlay to create depth -->
-  <div class="absolute inset-0 bg-gradient-to-tr from-[#ffffff] via-[#f8f9fa] to-[#f1f3f5] opacity-90 z-0"></div>
-  <div class="absolute w-[500px] h-[500px] bg-brand-yellow/10 rounded-full blur-[100px] top-0 left-[-20%] z-0"></div>
-  <div class="absolute w-[400px] h-[400px] bg-brand-yellow/5 rounded-full blur-[100px] bottom-[-10%] right-[-10%] z-0"></div>
+  <div
+    class="absolute inset-0 bg-gradient-to-tr from-[#ffffff] via-[#f8f9fa] to-[#f1f3f5] opacity-90 z-0"
+  >
+  </div>
+  <div
+    class="absolute w-[500px] h-[500px] bg-brand-yellow/10 rounded-full blur-[100px] top-0 left-[-20%] z-0"
+  >
+  </div>
+  <div
+    class="absolute w-[400px] h-[400px] bg-brand-yellow/5 rounded-full blur-[100px] bottom-[-10%] right-[-10%] z-0"
+  >
+  </div>
 
   <!-- Decorative floating balloons (CSS placeholders for festivity) -->
   <div class="absolute top-[20%] left-[10%] opacity-40 animate-pulse z-0">
-    <div class="w-12 h-16 bg-gradient-to-tr from-brand-yellow/40 to-yellow-200/40 rounded-full shadow-lg"></div>
+    <div
+      class="w-12 h-16 bg-gradient-to-tr from-brand-yellow/40 to-yellow-200/40 rounded-full shadow-lg"
+    >
+    </div>
     <div class="w-0.5 h-16 bg-black/10 mx-auto mt-2"></div>
   </div>
-  
-  <div class="absolute top-[30%] right-[15%] opacity-30 animate-bounce -z-0" style="animation-duration: 4s;">
-    <div class="w-16 h-20 bg-gradient-to-tr from-brand-yellow/30 to-black/5 rounded-full shadow-lg"></div>
+
+  <div
+    class="absolute top-[30%] right-[15%] opacity-30 animate-bounce -z-0"
+    style="animation-duration: 4s;"
+  >
+    <div
+      class="w-16 h-20 bg-gradient-to-tr from-brand-yellow/30 to-black/5 rounded-full shadow-lg"
+    >
+    </div>
     <div class="w-0.5 h-20 bg-black/10 mx-auto mt-2"></div>
   </div>
 
-  <div class="relative z-10 max-w-7xl mx-auto px-4 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center lg:items-start">
-    
+  <div
+    class="relative z-10 max-w-7xl mx-auto px-4 w-full grid grid-cols-1 lg:grid-cols-2 gap-12 items-center lg:items-start pt-20"
+  >
     <!-- Hero Text Content -->
     <div class="flex flex-col gap-6 text-center lg:text-left">
-      <div class="inline-flex w-max mx-auto lg:mx-0 items-center gap-2 bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide uppercase shadow-[0_0_10px_rgba(255,184,0,0.1)]">
+      <div
+        class="inline-flex w-max mx-auto lg:mx-0 items-center gap-2 bg-brand-yellow/10 border border-brand-yellow/30 text-brand-yellow px-4 py-1.5 rounded-full text-sm font-semibold tracking-wide uppercase shadow-[0_0_10px_rgba(255,184,0,0.1)]"
+      >
         <span class="w-2 h-2 rounded-full bg-brand-yellow animate-ping"></span>
         Edição Especial de Aniversário
       </div>
-      
-      <h1 class="text-4xl md:text-6xl font-extrabold text-brand-dark leading-tight tracking-tight">
-        <span class="text-brand-yellow">2 Anos</span> da Ratoeira Ads com a maior oferta da <span class="bg-gradient-to-r from-brand-yellow-hover to-brand-yellow bg-clip-text text-transparent">nossa história.</span>
+
+      <h1
+        class="text-4xl md:text-6xl font-extrabold text-brand-dark leading-tight tracking-tight"
+      >
+        <span class="text-brand-yellow">2 Anos</span> da Ratoeira Ads com a maior
+        oferta da <span
+          class="bg-gradient-to-r from-brand-yellow-hover to-brand-yellow bg-clip-text text-transparent"
+          >nossa história.</span
+        >
       </h1>
-      
-      <p class="text-lg md:text-xl text-brand-text/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed">
-        Não perca a chance de transformar o seu ROI. Acesso vitalício à ferramenta que mais de <strong class="text-brand-dark">+10.000 afiliados</strong> usam para bloquear bots e ver o lucro real das campanhas.
+
+      <p
+        class="text-lg md:text-xl text-brand-text/80 max-w-2xl mx-auto lg:mx-0 leading-relaxed"
+      >
+        Não perca a chance de transformar o seu ROI. Acesso vitalício à
+        ferramenta que mais de <strong class="text-brand-dark"
+          >+2.000 afiliados</strong
+        > usam para bloquear bots e ver o lucro real das campanhas.
       </p>
 
-      <ul class="text-left mt-4 mb-6 space-y-3 mx-auto lg:mx-0 inline-block w-max">
+      <ul
+        class="text-left mt-4 mb-6 space-y-3 mx-auto lg:mx-0 inline-block w-max"
+      >
         <li class="flex items-center gap-3 text-brand-text">
-          <svg class="w-5 h-5 text-brand-yellow flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
+          <svg
+            class="w-5 h-5 text-brand-yellow flex-shrink-0"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path></svg
+          >
           <span class="font-medium">100% de rastreamento das suas vendas.</span>
         </li>
         <li class="flex items-center gap-3 text-brand-text">
-          <svg class="w-5 h-5 text-brand-yellow flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-          <span class="font-medium">Bloqueio inteligente contra cliques falsos.</span>
+          <svg
+            class="w-5 h-5 text-brand-yellow flex-shrink-0"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path></svg
+          >
+          <span class="font-medium"
+            >Bloqueio inteligente contra cliques falsos.</span
+          >
         </li>
         <li class="flex items-center gap-3 text-brand-text">
-          <svg class="w-5 h-5 text-brand-yellow flex-shrink-0" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"></path></svg>
-          <span class="font-medium text-brand-yellow">Desconto exclusivo e por tempo limitado.</span>
+          <svg
+            class="w-5 h-5 text-brand-yellow flex-shrink-0"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+              clip-rule="evenodd"></path></svg
+          >
+          <span class="font-medium text-brand-yellow"
+            >Desconto exclusivo e por tempo limitado.</span
+          >
         </li>
       </ul>
-      
-      <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-        <a href="#planos" class="inline-flex items-center justify-center gap-3 bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark font-black text-lg py-5 px-10 rounded-full text-center transition-all duration-300 shadow-[0_15px_40px_rgba(255,184,0,0.3)] hover:shadow-[0_20px_50px_rgba(255,184,0,0.5)] transform hover:-translate-y-1 active:scale-95 uppercase tracking-tight">
+
+      <div
+        class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start"
+      >
+        <a
+          href="#planos"
+          class="inline-flex items-center justify-center gap-3 bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark font-black text-lg py-5 px-10 rounded-full text-center transition-all duration-300 shadow-[0_15px_40px_rgba(255,184,0,0.3)] hover:shadow-[0_20px_50px_rgba(255,184,0,0.5)] transform hover:-translate-y-1 active:scale-95 uppercase tracking-tight"
+        >
           REVELAR OFERTA AGORA
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+          <svg
+            class="w-6 h-6"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            ><path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="3"
+              d="M9 5l7 7-7 7"></path></svg
+          >
         </a>
       </div>
-      
     </div>
 
     <!-- Hero Form Area (Capture Form) -->
-    <div class="relative w-full flex justify-center lg:justify-end items-start z-20 lg:mt-12">
+    <div
+      class="relative w-full flex justify-center lg:justify-end items-start z-20 lg:mt-12"
+    >
       <!-- Conversion Form Container -->
-      <div class="bg-white rounded-[32px] border-8 border-brand-yellow p-6 shadow-2xl w-full max-w-[440px] relative group transition-all duration-500 hover:shadow-brand-yellow/10">
-        
+      <div
+        class="bg-white rounded-[32px] border-8 border-brand-yellow p-6 shadow-2xl w-full max-w-[440px] relative group transition-all duration-500 hover:shadow-brand-yellow/10"
+      >
         <!-- Step Indicator -->
         <div class="mb-2">
-          <span class="text-brand-yellow font-black text-[10px] md:text-xs uppercase tracking-[0.2em] block mb-1">PASSO 01/02</span>
-          <h2 class="text-xl md:text-3xl font-black text-brand-dark leading-tight tracking-tight">Ative seu teste de <span class="text-brand-yellow">14 dias</span></h2>
+          <span
+            class="text-brand-yellow font-black text-[10px] md:text-xs uppercase tracking-[0.2em] block mb-1"
+            >PASSO 01/02</span
+          >
+          <h2
+            class="text-xl md:text-3xl font-black text-brand-dark leading-tight tracking-tight"
+          >
+            Ative seu teste de <span class="text-brand-yellow">14 dias</span>
+          </h2>
         </div>
 
         <!-- Form fields -->
         <form class="flex flex-col gap-2">
           <div class="relative">
-            <input 
-              type="text" 
-              placeholder="Seu nome completo" 
-              class="w-full bg-brand-lighter px-5 py-2.5 rounded-xl border-2 border-transparent focus:border-brand-yellow/30 focus:bg-white outline-none transition-all placeholder:text-brand-text/30 font-bold text-brand-dark text-sm" 
+            <input
+              type="text"
+              placeholder="Seu nome completo"
+              class="w-full bg-brand-lighter px-5 py-2.5 rounded-xl border-2 border-transparent focus:border-brand-yellow/30 focus:bg-white outline-none transition-all placeholder:text-brand-text/30 font-bold text-brand-dark text-sm"
             />
           </div>
-          
+
           <div class="relative">
-            <input 
-              type="email" 
-              placeholder="Seu melhor e-mail" 
-              class="w-full bg-brand-lighter px-5 py-2.5 rounded-xl border-2 border-transparent focus:border-brand-yellow/30 focus:bg-white outline-none transition-all placeholder:text-brand-text/30 font-bold text-brand-dark text-sm" 
+            <input
+              type="email"
+              placeholder="Seu melhor e-mail"
+              class="w-full bg-brand-lighter px-5 py-2.5 rounded-xl border-2 border-transparent focus:border-brand-yellow/30 focus:bg-white outline-none transition-all placeholder:text-brand-text/30 font-bold text-brand-dark text-sm"
             />
           </div>
 
           <!-- Phone Input with Country Code -->
-          <div class="relative flex items-center bg-brand-lighter rounded-xl border-2 border-transparent focus-within:border-brand-yellow/30 focus-within:bg-white transition-all">
-            
+          <div
+            class="relative flex items-center bg-brand-lighter rounded-xl border-2 border-transparent focus-within:border-brand-yellow/30 focus-within:bg-white transition-all"
+          >
             <!-- Selector Dropdown Wrapper -->
             <div class="relative group/country">
-              <button 
-                type="button" 
-                id="country-selector-trigger" 
+              <button
+                type="button"
+                id="country-selector-trigger"
                 class="flex items-center gap-2 px-4 py-2.5 border-r border-black/5 hover:bg-black/5 rounded-l-xl transition-all outline-none h-full"
               >
                 <span id="selected-flag" class="text-lg leading-none">🇧🇷</span>
-                <span id="selected-code" class="font-black text-brand-dark leading-none text-sm">+55</span>
-                <svg class="w-3 h-3 text-brand-text/20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M19 9l-7 7-7-7"></path></svg>
+                <span
+                  id="selected-code"
+                  class="font-black text-brand-dark leading-none text-sm"
+                  >+55</span
+                >
+                <svg
+                  class="w-3 h-3 text-brand-text/20"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                  ><path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    stroke-width="3"
+                    d="M19 9l-7 7-7-7"></path></svg
+                >
               </button>
 
               <!-- Countries List Dropdown -->
-              <div id="country-dropdown" class="hidden absolute left-0 top-full mt-2 w-max min-w-[200px] bg-white border border-black/5 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-50 py-2 overflow-y-auto overflow-x-hidden max-h-[140px] backdrop-blur-sm">
-                <button type="button" class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left" data-flag="🇧🇷" data-code="+55">
+              <div
+                id="country-dropdown"
+                class="hidden absolute left-0 top-full mt-2 w-max min-w-[200px] bg-white border border-black/5 rounded-xl shadow-[0_20px_50px_rgba(0,0,0,0.15)] z-50 py-2 overflow-y-auto overflow-x-hidden max-h-[140px] backdrop-blur-sm"
+              >
+                <button
+                  type="button"
+                  class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left"
+                  data-flag="🇧🇷"
+                  data-code="+55"
+                >
                   <span class="text-lg">🇧🇷</span>
-                  <span class="font-bold text-brand-dark text-xs">Brasil (+55)</span>
+                  <span class="font-bold text-brand-dark text-xs"
+                    >Brasil (+55)</span
+                  >
                 </button>
-                <button type="button" class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left" data-flag="🇵🇹" data-code="+351">
+                <button
+                  type="button"
+                  class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left"
+                  data-flag="🇵🇹"
+                  data-code="+351"
+                >
                   <span class="text-lg">🇵🇹</span>
-                  <span class="font-bold text-brand-dark text-xs">Portugal (+351)</span>
+                  <span class="font-bold text-brand-dark text-xs"
+                    >Portugal (+351)</span
+                  >
                 </button>
-                <button type="button" class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left" data-flag="🇺🇸" data-code="+1">
+                <button
+                  type="button"
+                  class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left"
+                  data-flag="🇺🇸"
+                  data-code="+1"
+                >
                   <span class="text-lg">🇺🇸</span>
-                  <span class="font-bold text-brand-dark text-xs">EUA (+1)</span>
+                  <span class="font-bold text-brand-dark text-xs">EUA (+1)</span
+                  >
                 </button>
-                <button type="button" class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left" data-flag="🇪🇸" data-code="+34">
+                <button
+                  type="button"
+                  class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left"
+                  data-flag="🇪🇸"
+                  data-code="+34"
+                >
                   <span class="text-lg">🇪🇸</span>
-                  <span class="font-bold text-brand-dark text-xs">Espanha (+34)</span>
+                  <span class="font-bold text-brand-dark text-xs"
+                    >Espanha (+34)</span
+                  >
                 </button>
-                <button type="button" class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left" data-flag="🇦🇷" data-code="+54">
+                <button
+                  type="button"
+                  class="country-item flex items-center gap-3 w-full px-5 py-2.5 hover:bg-brand-yellow/10 transition-all text-left"
+                  data-flag="🇦🇷"
+                  data-code="+54"
+                >
                   <span class="text-lg">🇦🇷</span>
-                  <span class="font-bold text-brand-dark text-xs">Argentina (+54)</span>
+                  <span class="font-bold text-brand-dark text-xs"
+                    >Argentina (+54)</span
+                  >
                 </button>
               </div>
             </div>
 
-            <input 
-              type="tel" 
-              placeholder="Seu Telefone (XX) X.XXXX-XXXX" 
-              class="w-full px-5 py-2.5 bg-transparent outline-none placeholder:text-brand-text/30 font-bold text-brand-dark text-sm" 
+            <input
+              type="tel"
+              placeholder="Seu Telefone (XX) X.XXXX-XXXX"
+              class="w-full px-5 py-2.5 bg-transparent outline-none placeholder:text-brand-text/30 font-bold text-brand-dark text-sm"
             />
           </div>
 
           <!-- Submit Button -->
-          <button 
-            type="submit" 
+          <button
+            type="submit"
             class="mt-2 w-full bg-brand-yellow hover:bg-brand-yellow-hover text-brand-dark font-black py-4 rounded-full flex items-center justify-center gap-3 transition-all shadow-[0_10px_30px_rgba(255,184,0,0.2)] hover:shadow-[0_15px_40px_rgba(255,184,0,0.4)] transform hover:-translate-y-1 active:scale-95 text-base uppercase tracking-widest"
           >
             Continuar
-            <svg class="w-5 h-5 transform transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M9 5l7 7-7 7"></path></svg>
+            <svg
+              class="w-5 h-5 transform transition-transform group-hover:translate-x-1"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              ><path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="3"
+                d="M9 5l7 7-7 7"></path></svg
+            >
           </button>
         </form>
 
         <!-- Trust signal under button -->
-        <p class="text-center mt-4 text-[9px] text-brand-text/40 font-bold uppercase tracking-widest flex items-center justify-center gap-2">
-          <svg class="w-2.5 h-2.5 text-brand-yellow" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"></path></svg>
+        <p
+          class="text-center mt-4 text-[9px] text-brand-text/40 font-bold uppercase tracking-widest flex items-center justify-center gap-2"
+        >
+          <svg
+            class="w-2.5 h-2.5 text-brand-yellow"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            ><path
+              fill-rule="evenodd"
+              d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+              clip-rule="evenodd"></path></svg
+          >
           Sua privacidade é nossa prioridade absoluta.
         </p>
       </div>
-
     </div>
   </div>
 </section>
 
 <script is:inline>
-  (function() {
+  (function () {
     function initCountrySelector() {
-      const trigger = document.getElementById('country-selector-trigger');
-      const dropdown = document.getElementById('country-dropdown');
-      const flagEl = document.getElementById('selected-flag');
-      const codeEl = document.getElementById('selected-code');
-      const items = document.querySelectorAll('.country-item');
+      const trigger = document.getElementById("country-selector-trigger");
+      const dropdown = document.getElementById("country-dropdown");
+      const flagEl = document.getElementById("selected-flag");
+      const codeEl = document.getElementById("selected-code");
+      const items = document.querySelectorAll(".country-item");
 
       if (!trigger || !dropdown) {
-        console.error('Seletor de DDI: Elementos não encontrados no DOM.');
+        console.error("Seletor de DDI: Elementos não encontrados no DOM.");
         return;
       }
 
-      console.log('Seletor de DDI: Inicializado com sucesso.');
+      console.log("Seletor de DDI: Inicializado com sucesso.");
 
       // Função para alternar o dropdown
       const toggleDropdown = (e) => {
         e.preventDefault();
         e.stopPropagation();
-        const isHidden = dropdown.style.display === 'none' || dropdown.classList.contains('hidden');
-        
+        const isHidden =
+          dropdown.style.display === "none" ||
+          dropdown.classList.contains("hidden");
+
         if (isHidden) {
-          dropdown.style.display = 'block';
-          dropdown.classList.remove('hidden');
-          console.log('Seletor de DDI: Menu Aberto');
+          dropdown.style.display = "block";
+          dropdown.classList.remove("hidden");
+          console.log("Seletor de DDI: Menu Aberto");
         } else {
-          dropdown.style.display = 'none';
-          dropdown.classList.add('hidden');
-          console.log('Seletor de DDI: Menu Fechado');
+          dropdown.style.display = "none";
+          dropdown.classList.add("hidden");
+          console.log("Seletor de DDI: Menu Fechado");
         }
       };
 
@@ -194,40 +355,43 @@
       trigger.onclick = toggleDropdown;
 
       // Função para selecionar um país
-      items.forEach(item => {
+      items.forEach((item) => {
         item.onclick = (e) => {
           e.preventDefault();
           e.stopPropagation();
-          const flag = item.getAttribute('data-flag');
-          const code = item.getAttribute('data-code');
-          
-          console.log('Seletor de DDI: País selecionado:', flag, code);
-          
+          const flag = item.getAttribute("data-flag");
+          const code = item.getAttribute("data-code");
+
+          console.log("Seletor de DDI: País selecionado:", flag, code);
+
           if (flag && flagEl) flagEl.textContent = flag;
           if (code && codeEl) codeEl.textContent = code;
-          
-          dropdown.style.display = 'none';
-          dropdown.classList.add('hidden');
+
+          dropdown.style.display = "none";
+          dropdown.classList.add("hidden");
         };
       });
 
       // Fechar ao clicar fora
-      document.addEventListener('click', (e) => {
+      document.addEventListener("click", (e) => {
         if (!dropdown.contains(e.target) && !trigger.contains(e.target)) {
-          dropdown.style.display = 'none';
-          dropdown.classList.add('hidden');
+          dropdown.style.display = "none";
+          dropdown.classList.add("hidden");
         }
       });
     }
 
     // Inicializa garantindo que o DOM esteja pronto
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
+    if (
+      document.readyState === "complete" ||
+      document.readyState === "interactive"
+    ) {
       initCountrySelector();
     } else {
-      document.addEventListener('DOMContentLoaded', initCountrySelector);
+      document.addEventListener("DOMContentLoaded", initCountrySelector);
     }
-    
+
     // Suporte para Astro Page Transitions
-    document.addEventListener('astro:after-swap', initCountrySelector);
+    document.addEventListener("astro:after-swap", initCountrySelector);
   })();
 </script>
