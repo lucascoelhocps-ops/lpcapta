@@ -1,8 +1,5 @@
----
-// Header.astro
----
-<header class="w-full absolute top-0 left-0 bg-transparent z-50">
-  <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center">
+<header id="main-header" class="w-full fixed top-0 left-0 bg-transparent z-50 transition-all duration-300">
+  <div class="max-w-7xl mx-auto px-4 py-6 flex justify-between items-center transition-all duration-300">
     <a href="/" class="flex items-center gap-2">
       <img src="/logo.png" alt="Ratoeira Ads" class="h-10 w-auto object-contain rounded-md drop-shadow-lg" />
     </a>
@@ -18,3 +15,30 @@
     </a>
   </div>
 </header>
+
+<script is:inline>
+  (function() {
+    const initHeader = () => {
+      const header = document.getElementById('main-header');
+      const inner = header?.querySelector('div');
+      
+      const updateHeader = () => {
+        if (window.scrollY > 20) {
+          header?.classList.add('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-black/5');
+          inner?.classList.add('!py-3');
+          inner?.classList.remove('py-6');
+        } else {
+          header?.classList.remove('bg-white/80', 'backdrop-blur-md', 'shadow-sm', 'border-b', 'border-black/5');
+          inner?.classList.add('py-6');
+          inner?.classList.remove('!py-3');
+        }
+      };
+
+      window.addEventListener('scroll', updateHeader);
+      updateHeader();
+    }
+
+    initHeader();
+    document.addEventListener('astro:after-swap', initHeader);
+  })();
+</script>
