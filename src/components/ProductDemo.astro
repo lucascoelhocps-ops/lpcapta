@@ -1,0 +1,87 @@
+---
+// ProductDemo.astro
+---
+
+<section id="demo" class="py-24 bg-brand-dark text-white relative overflow-hidden">
+  
+  <!-- Estética de fundo: Gradiente sutil e formas decorativas para profundidade -->
+  <div class="absolute inset-0 bg-linear-to-b from-brand-dark via-brand-darker to-brand-dark opacity-90 z-0"></div>
+  <div class="absolute w-[600px] h-[600px] bg-brand-yellow/5 rounded-full blur-[120px] top-[-10%] right-[-10%] z-0"></div>
+  <div class="absolute w-[400px] h-[400px] bg-brand-yellow/3 rounded-full blur-[100px] bottom-[-5%] left-[-5%] z-0"></div>
+
+  <div class="max-w-5xl mx-auto px-4 relative z-10 text-center">
+    
+    <div class="mb-12 space-y-4 reveal-on-scroll">
+      <span class="inline-block text-brand-yellow font-black text-xs md:text-sm uppercase tracking-[0.3em] bg-brand-yellow/10 border border-brand-yellow/20 px-4 py-1.5 rounded-full">
+        Como Funciona
+      </span>
+      
+      <h2 class="text-3xl md:text-5xl font-black text-white leading-tight tracking-tight">
+        VEJA POR DENTRO DA <span class="bg-linear-to-r from-brand-yellow to-yellow-300 bg-clip-text text-transparent">FERRAMENTA</span>
+      </h2>
+      
+      <p class="text-gray-400 text-lg md:text-xl max-w-3xl mx-auto leading-relaxed">
+        Em 3 minutos veja como a Ratoeira rastreia cada venda, bloqueia fraudes e dá visão completa da sua operação no Google Ads.
+      </p>
+    </div>
+
+    <!-- Video Container com Glow Premium -->
+    <div class="relative group/video max-w-4xl mx-auto reveal-on-scroll" style="animation-delay: 200ms;">
+      <!-- Outer glow effect -->
+      <div class="absolute -inset-1.5 bg-linear-to-r from-brand-yellow/40 to-yellow-500/20 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+      
+      <!-- Video Wrapper -->
+      <div class="relative rounded-2xl overflow-hidden aspect-video bg-brand-darker border-4 border-white/5 shadow-[0_30px_100px_rgba(0,0,0,0.6)]">
+        <iframe 
+          class="w-full h-full"
+          src="https://www.youtube.com/embed/iG3RtYyQ8qI" 
+          title="Como Funciona Ratoeira Ads" 
+          frameborder="0" 
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+          referrerpolicy="strict-origin-when-cross-origin" 
+          allowfullscreen>
+        </iframe>
+      </div>
+      
+      <!-- Decorative tech element -->
+      <div class="absolute -bottom-6 -right-6 w-24 h-24 bg-brand-yellow/10 rounded-full blur-2xl z-0 pointer-events-none"></div>
+      <div class="absolute -top-6 -left-6 w-24 h-24 bg-brand-yellow/10 rounded-full blur-2xl z-0 pointer-events-none"></div>
+    </div>
+
+    <!-- Call to Action sutil opcional -->
+    <div class="mt-16 reveal-on-scroll" style="animation-delay: 400ms;">
+      <p class="text-sm font-bold text-gray-500 uppercase tracking-widest flex items-center justify-center gap-4">
+        <span class="w-8 h-px bg-white/10"></span>
+        Tecnologia validada por +10.000 profissionais
+        <span class="w-8 h-px bg-white/10"></span>
+      </p>
+    </div>
+
+  </div>
+</section>
+
+<style>
+  /* Reveal Animation */
+  .reveal-on-scroll {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Iframe behavior */
+  iframe {
+    filter: brightness(0.95) contrast(1.05);
+    transition: all 0.5s ease;
+  }
+  
+  .group\/video:hover iframe {
+    filter: brightness(1) contrast(1);
+  }
+</style>
