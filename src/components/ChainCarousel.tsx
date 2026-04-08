@@ -203,7 +203,7 @@ const ChainCarousel: React.FC<ChainCarouselProps> = ({
 
     // --- JSX Render --- 
     return ( 
-        <div id='explore-platforms' className={`py-24 bg-white overflow-hidden space-y-20 ${className}`}> 
+        <div id='integracoes' className={`py-24 bg-white overflow-hidden space-y-20 ${className}`}> 
             <div className='flex flex-col xl:flex-row max-w-7xl mx-auto px-4 md:px-8 gap-12 justify-center items-center'> 
  
                 {/* Left Section - Chain Carousel (Orange) */} 

@@ -50,15 +50,11 @@ export const TextHoverEffect = ({
           cy="50%"
           r="25%"
         >
-          {hovered && (
-            <>
-              <stop offset="0%" stopColor="#FFB800" />
-              <stop offset="25%" stopColor="#FFD700" />
-              <stop offset="50%" stopColor="#FFB800" />
-              <stop offset="75%" stopColor="#E5A600" />
-              <stop offset="100%" stopColor="#FFB800" />
-            </>
-          )}
+          <stop offset="0%" stopColor="#FFB800" />
+          <stop offset="25%" stopColor="#FFD54A" />
+          <stop offset="50%" stopColor="#FFE082" />
+          <stop offset="75%" stopColor="#E5A600" />
+          <stop offset="100%" stopColor="#FFB800" />
         </linearGradient>
 
         <motion.radialGradient
@@ -89,7 +85,7 @@ export const TextHoverEffect = ({
         dominantBaseline="middle"
         strokeWidth="0.3"
         className="fill-transparent stroke-neutral-200 font-[helvetica] text-6xl font-bold dark:stroke-neutral-800"
-        style={{ opacity: hovered ? 0.7 : 0 }}
+        style={{ opacity: hovered ? 0.8 : 0.3 }}
       >
         {text}
       </text>
@@ -100,7 +96,7 @@ export const TextHoverEffect = ({
         dominantBaseline="middle"
         strokeWidth="0.3"
         className="fill-transparent stroke-brand-yellow font-[helvetica] text-6xl font-bold 
-        dark:stroke-brand-yellow/60"
+        dark:stroke-[#FFB80099]"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -119,9 +115,10 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         stroke="url(#textGradient)"
-        strokeWidth="0.3"
+        strokeWidth={hovered ? "0.8" : "0.5"}
         mask="url(#textMask)"
         className="fill-transparent font-[helvetica] text-6xl font-bold"
+        style={{ filter: hovered ? "drop-shadow(0 0 10px #FFB800)" : "drop-shadow(0 0 5px #FFB800)" }}
       >
         {text}
       </text>

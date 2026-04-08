@@ -16,7 +16,7 @@ import { FooterBackgroundGradient, TextHoverEffect } from "./ui/hover-footer";
 function Footer() {
   return (
     <footer className="bg-brand-dark relative h-fit rounded-[3rem] overflow-hidden m-4 md:m-8 text-white/70">
-      <div className="max-w-7xl mx-auto px-6 py-16 md:p-14 z-40 relative">
+      <div className="max-w-7xl mx-auto px-6 pt-16 pb-4 md:px-14 md:pt-14 md:pb-6 z-40 relative">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 md:gap-8 lg:gap-16 pb-12">
           
           {/* Section: Ratoeira ADS */}
@@ -32,7 +32,7 @@ function Footer() {
                <h4 className="text-white text-sm font-black uppercase tracking-widest">Produto</h4>
                <ul className="space-y-2 text-sm font-bold">
                  <li><a href="#como-funciona" className="hover:text-brand-yellow transition-colors">Funcionalidades</a></li>
-                 <li><a href="#plataformas" className="hover:text-brand-yellow transition-colors">Integrações</a></li>
+                 <li><a href="#integracoes" className="hover:text-brand-yellow transition-colors">Integrações</a></li>
                  <li><a href="#planos" className="hover:text-brand-yellow transition-colors">Preços</a></li>
                </ul>
             </div>
@@ -94,10 +94,8 @@ function Footer() {
           </div>
         </div>
 
-        <hr className="border-t border-white/10 my-12" />
-
         {/* Footer bottom */}
-        <div className="flex flex-col md:flex-row justify-between items-center text-xs space-y-4 md:space-y-0 opacity-60 font-bold">
+        <div className="flex flex-col md:flex-row justify-between items-center text-xs space-y-4 md:space-y-0 opacity-60 font-bold mt-4 mb-4">
           <div className="flex space-x-6">
             <a href="#" className="hover:text-brand-yellow transition-colors"><Instagram size={20} /></a>
             <a href="#" className="hover:text-brand-yellow transition-colors"><Facebook size={20} /></a>
@@ -107,11 +105,12 @@ function Footer() {
             &copy; {new Date().getFullYear()} Ratoeira Group. Todos os direitos reservados.
           </p>
         </div>
+
+        <hr className="border-t border-white/10" />
       </div>
 
-      {/* Text hover effect */}
-      <div className="lg:flex hidden h-[22rem] md:h-[26rem] -mt-32 md:-mt-40 -mb-20 md:-mb-28">
-        <TextHoverEffect text="RATOEIRA" className="z-50" />
+      <div className="flex h-[9rem] md:h-[13rem] lg:h-[16rem] mt-2 md:mt-4 -mb-6 md:-mb-10 lg:-mb-14 relative z-50">
+        <TextHoverEffect text="RATOEIRA" className="w-full h-full" />
       </div>
 
       <FooterBackgroundGradient />
