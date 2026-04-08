@@ -8,8 +8,23 @@ import Pricing from '../components/Pricing.astro';
 import ProductDemo from '../components/ProductDemo.astro';
 import HighConversionFeatures from '../components/HighConversionFeatures.astro';
 import ResultsOnStatement from '../components/ResultsOnStatement.astro';
+import ChainCarousel from '../components/ChainCarousel';
 import FAQ from '../components/FAQ.astro';
 import Footer from '../components/Footer.astro';
+
+const platforms = [
+  { id: 'hotmart', name: 'Hotmart', details: 'INTEGRADO' },
+  { id: 'kiwify', name: 'Kiwify', details: 'INTEGRADO' },
+  { id: 'eduzz', name: 'Eduzz', details: 'INTEGRADO' },
+  { id: 'perfectpay', name: 'PerfectPay', details: 'INTEGRADO' },
+  { id: 'monetizze', name: 'Monetizze', details: 'INTEGRADO' },
+  { id: 'ticto', name: 'Ticto', details: 'INTEGRADO' },
+  { id: 'braip', name: 'Braip', details: 'INTEGRADO' },
+  { id: 'doppus', name: 'Doppus', details: 'INTEGRADO' },
+  { id: 'kirvano', name: 'Kirvano', details: 'INTEGRADO' },
+  { id: 'cakto', name: 'Cakto', details: 'INTEGRADO' },
+  { id: 'greenn', name: 'Greenn', details: 'INTEGRADO' },
+];
 
 // A promoção é de Aniversário e requer impacto visual!
 ---
@@ -23,6 +38,7 @@ import Footer from '../components/Footer.astro';
     <SocialProofMarquee />
     <ProductDemo />
     <HighConversionFeatures />
+    <ChainCarousel client:load items={platforms} />
     <ResultsOnStatement />
     <FAQ />
   </main>
