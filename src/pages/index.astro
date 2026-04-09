@@ -9,7 +9,8 @@ import ProductDemo from '../components/ProductDemo.astro';
 import HighConversionFeatures from '../components/HighConversionFeatures.astro';
 import ResultsOnStatement from '../components/ResultsOnStatement.astro';
 import ChainCarousel from '../components/ChainCarousel';
-import FAQ from '../components/FAQ.astro';
+import PromoCountdown from '../components/PromoCountdown.tsx';
+import FAQ from '../components/FAQ.tsx';
 import Footer from '../components/Footer.astro';
 
 const platforms = [
@@ -34,13 +35,14 @@ const platforms = [
   <main>
     <Hero />
     <SocialProof />
+    <PromoCountdown client:visible />
     <Pricing />
     <SocialProofMarquee />
     <ProductDemo />
     <HighConversionFeatures />
     <ChainCarousel client:load items={platforms} />
     <ResultsOnStatement />
-    <FAQ />
+    <FAQ client:visible />
   </main>
   <Footer />
 </Layout>
