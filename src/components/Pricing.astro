@@ -861,6 +861,37 @@
         </div>
       </div>
       
+      <div id="checkout-popup" class="fixed inset-0 z-[120] hidden items-center justify-center p-4 md:p-6">
+        <div class="absolute inset-0 bg-brand-dark/80 backdrop-blur-sm" data-popup-close></div>
+        <div class="relative w-full max-w-xl bg-white rounded-3xl border border-brand-yellow/30 shadow-2xl p-6 md:p-8">
+          <button type="button" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-brand-dark text-white flex items-center justify-center hover:bg-black transition-colors" data-popup-close>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M6 6l12 12M18 6l-12 12"></path>
+            </svg>
+          </button>
+          <p class="text-[10px] uppercase tracking-[0.24em] text-brand-yellow font-black mb-3">Antes de liberar o checkout</p>
+          <h4 class="text-2xl md:text-3xl font-black text-brand-dark mb-2">Preencha seus dados</h4>
+          <p class="text-sm text-brand-text/70 mb-6">Você está a um passo de finalizar sua assinatura.</p>
+          <form id="checkout-popup-form" class="space-y-4">
+            <div>
+              <label for="popup-name" class="block text-xs font-black uppercase tracking-widest text-brand-dark/70 mb-2">Nome</label>
+              <input id="popup-name" name="name" type="text" required class="w-full rounded-2xl border border-brand-dark/15 bg-white px-4 py-3 text-sm font-semibold text-brand-dark focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-brand-yellow/30" placeholder="Seu nome completo" />
+            </div>
+            <div>
+              <label for="popup-email" class="block text-xs font-black uppercase tracking-widest text-brand-dark/70 mb-2">E-mail</label>
+              <input id="popup-email" name="email" type="email" required class="w-full rounded-2xl border border-brand-dark/15 bg-white px-4 py-3 text-sm font-semibold text-brand-dark focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-brand-yellow/30" placeholder="voce@exemplo.com" />
+            </div>
+            <div>
+              <label for="popup-phone" class="block text-xs font-black uppercase tracking-widest text-brand-dark/70 mb-2">Telefone (com DDI e DDD)</label>
+              <input id="popup-phone" name="phone" type="tel" required class="w-full rounded-2xl border border-brand-dark/15 bg-white px-4 py-3 text-sm font-semibold text-brand-dark focus:outline-none focus:border-brand-yellow focus:ring-2 focus:ring-brand-yellow/30" placeholder="+55 (11) 99999-9999" />
+            </div>
+            <button type="submit" class="w-full mt-2 bg-brand-yellow text-brand-dark py-3 rounded-full text-sm uppercase tracking-widest font-black shadow-lg shadow-brand-yellow/25 hover:bg-brand-yellow-hover transition-all">
+              Ir para checkout
+            </button>
+          </form>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
@@ -955,6 +986,7 @@
   // Initial load
   initPricing();
   updateDynamicPrices();
+  initCheckoutPopup();
 
   function initPriceAutoRefresh() {
     const win = window as any;
@@ -977,6 +1009,67 @@
   }
 
   initPriceAutoRefresh();
+
+  function initCheckoutPopup() {
+    const win = window as any;
+    if (win.__checkoutPopupHooked) return;
+    win.__checkoutPopupHooked = true;
+
+    const closePopup = () => {
+      const popup = document.getElementById('checkout-popup');
+      if (!popup) return;
+      popup.classList.add('hidden');
+      popup.classList.remove('flex');
+      document.body.classList.remove('overflow-hidden');
+    };
+
+    const openPopup = (checkoutTarget: string) => {
+      const popup = document.getElementById('checkout-popup');
+      const form = document.getElementById('checkout-popup-form') as HTMLFormElement | null;
+      if (!popup || !form) return;
+      form.dataset.checkoutTarget = checkoutTarget;
+      popup.classList.remove('hidden');
+      popup.classList.add('flex');
+      document.body.classList.add('overflow-hidden');
+      const firstInput = form.querySelector('input[name="name"]') as HTMLInputElement | null;
+      firstInput?.focus();
+    };
+
+    document.addEventListener('click', (event) => {
+      const target = event.target as HTMLElement | null;
+      if (!target) return;
+
+      const closeTrigger = target.closest('[data-popup-close]') as HTMLElement | null;
+      if (closeTrigger) {
+        closePopup();
+        return;
+      }
+
+      const checkoutTrigger = target.closest('#planos a[href^="#checkout-"]') as HTMLAnchorElement | null;
+      if (!checkoutTrigger) return;
+      event.preventDefault();
+      openPopup(checkoutTrigger.getAttribute('href') || '#');
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closePopup();
+      }
+    });
+
+    document.addEventListener('submit', (event) => {
+      const form = event.target as HTMLFormElement | null;
+      if (!form || form.id !== 'checkout-popup-form') return;
+      event.preventDefault();
+      if (!form.checkValidity()) {
+        form.reportValidity();
+        return;
+      }
+      const checkoutTarget = form.dataset.checkoutTarget || '#';
+      closePopup();
+      window.location.href = checkoutTarget;
+    });
+  }
 
   function renderCardDiscountBadges(discountPercent: number, progress: number) {
     const win = window as any;
@@ -1587,6 +1680,7 @@
     initPricing();
     updateDynamicPrices();
     initPriceAutoRefresh();
+    initCheckoutPopup();
   });
 </script>
 
