@@ -1324,6 +1324,30 @@
       return null;
     };
 
+    const getBaseParcelPrice = (bundle: string, period: string, plan: string) => {
+      if (bundle === 'ads') {
+        const baseValue = (adsParcelBase as any)?.[period]?.[plan];
+        return typeof baseValue === 'number' ? baseValue : null;
+      }
+
+      if (bundle === 'combo') {
+        if (period === 'vitalicio' && plan === 'ratazana') {
+          return vitalicioManualSchedule.combo["2026-04-19"] / 12;
+        }
+        const basePrice = getBasePrice(bundle, period, plan);
+        if (basePrice === undefined) return null;
+        const installments = period === 'anual' ? 12 : period === 'semestral' ? 6 : 1;
+        return basePrice / installments;
+      }
+
+      if (bundle === 'pages') {
+        const baseValue = (pagesParcelBase as any)?.[period]?.[plan];
+        return typeof baseValue === 'number' ? baseValue : null;
+      }
+
+      return null;
+    };
+
     document.querySelectorAll('[data-price-parcel-calc]').forEach(el => {
       const bundleAttr = el.getAttribute('data-calc-bundle');
       const periodAttr = el.getAttribute('data-calc-period');
@@ -1334,8 +1358,17 @@
       const parcelPrice = getEffectiveParcelPrice(bundleAttr, periodAttr, planAttr);
       if (parcelPrice === null) return;
 
+      const baseParcelPrice = getBaseParcelPrice(bundleAttr, periodAttr, planAttr);
       const parcelPrefix = periodAttr === 'anual' ? '12x ' : periodAttr === 'semestral' ? '6x ' : '';
-      el.innerHTML = `${parcelPrefix}R$ ${parcelPrice.toFixed(2).replace('.',',')}`;
+      const card = (el as HTMLElement).closest('.relative');
+      const isDarkCard = card?.classList.contains('bg-black');
+      const strikeClass = isDarkCard ? 'text-white/30' : 'text-brand-dark/40';
+
+      if (baseParcelPrice !== null && parcelPrice < baseParcelPrice) {
+        el.innerHTML = `<span class="text-sm ${strikeClass} line-through block mb-1">${parcelPrefix}R$ ${baseParcelPrice.toFixed(2).replace('.',',')}</span>${parcelPrefix}R$ ${parcelPrice.toFixed(2).replace('.',',')}`;
+      } else {
+        el.innerHTML = `${parcelPrefix}R$ ${parcelPrice.toFixed(2).replace('.',',')}`;
+      }
     });
 
     document.querySelectorAll('[data-price-calc-main]').forEach(el => {
@@ -1407,8 +1440,21 @@
       };
       const parcelPrice = parcelPriceMap[bundle];
       if (parcelPrice === undefined) return;
-      
-      el.innerHTML = `12x R$ ${parcelPrice.toFixed(2).replace('.',',')}`;
+      const baseParcelPriceMap: Record<string, number> = {
+        ads: adsParcelBase.vitalicio.ratazana,
+        combo: vitalicioManualSchedule.combo["2026-04-19"] / 12,
+        pages: pagesParcelBase.vitalicio.ratazana
+      };
+      const baseParcelPrice = baseParcelPriceMap[bundle];
+      const card = (el as HTMLElement).closest('.relative');
+      const isDarkCard = card?.classList.contains('bg-black');
+      const strikeClass = isDarkCard ? 'text-white/30' : 'text-brand-dark/40';
+
+      if (parcelPrice < baseParcelPrice) {
+        el.innerHTML = `<span class="text-sm ${strikeClass} line-through block mb-1">12x R$ ${baseParcelPrice.toFixed(2).replace('.',',')}</span>12x R$ ${parcelPrice.toFixed(2).replace('.',',')}`;
+      } else {
+        el.innerHTML = `12x R$ ${parcelPrice.toFixed(2).replace('.',',')}`;
+      }
     });
   }
 
