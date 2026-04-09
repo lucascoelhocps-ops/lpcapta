@@ -955,31 +955,13 @@
   updateDynamicPrices();
 
   function initPriceAutoRefresh() {
-    const tz = "America/Sao_Paulo";
     const win = window as any;
 
-    if (win.__pricingMidnightTimeout) {
-      clearTimeout(win.__pricingMidnightTimeout);
-    }
-    if (win.__pricingDailyInterval) {
-      clearInterval(win.__pricingDailyInterval);
+    if (win.__pricingRefreshInterval) {
+      clearInterval(win.__pricingRefreshInterval);
     }
 
-    const scheduleMidnightRefresh = () => {
-      const nowSp = new Date(new Date().toLocaleString("en-US", { timeZone: tz }));
-      const msUntilMidnight =
-        ((23 - nowSp.getHours()) * 60 * 60 * 1000) +
-        ((59 - nowSp.getMinutes()) * 60 * 1000) +
-        ((59 - nowSp.getSeconds()) * 1000) +
-        (1000 - nowSp.getMilliseconds());
-
-      win.__pricingMidnightTimeout = window.setTimeout(() => {
-        updateDynamicPrices();
-        win.__pricingDailyInterval = window.setInterval(updateDynamicPrices, 24 * 60 * 60 * 1000);
-      }, msUntilMidnight);
-    };
-
-    scheduleMidnightRefresh();
+    win.__pricingRefreshInterval = window.setInterval(updateDynamicPrices, 15000);
 
     if (!win.__pricingVisibilityHooked) {
       document.addEventListener('visibilitychange', () => {
@@ -1001,15 +983,32 @@
     const y = now.getFullYear();
     const m = String(now.getMonth() + 1).padStart(2, '0');
     const d = String(now.getDate()).padStart(2, '0');
-    const dateKey = `${y}-${m}-${d}`;
+    const realDateKey = `${y}-${m}-${d}`;
+    const promoDateKeys = [
+      "2026-04-13",
+      "2026-04-14",
+      "2026-04-15",
+      "2026-04-16",
+      "2026-04-17",
+      "2026-04-18",
+      "2026-04-19"
+    ];
+    const promoAnchor = new Date(now);
+    promoAnchor.setHours(10, 10, 0, 0);
+    const slotMs = 20 * 60 * 1000;
+    const elapsedMs = now.getTime() - promoAnchor.getTime();
+    const slotIndex =
+      elapsedMs <= 0
+        ? 0
+        : Math.min(promoDateKeys.length - 1, Math.floor(elapsedMs / slotMs));
+    const forcedPromoDateKey = promoDateKeys[slotIndex] || promoDateKeys[promoDateKeys.length - 1];
+    const dateKey = forcedPromoDateKey || realDateKey;
 
     const discountSchedule: Record<string, number> = {
       "2026-04-13": 0.35, "2026-04-14": 0.30, "2026-04-15": 0.29,
       "2026-04-16": 0.28, "2026-04-17": 0.27, "2026-04-18": 0.26,
       "2026-04-19": 0.25
     };
-    
-    // Fora da janela promocional (antes de 13/04 ou depois de 19/04), sem desconto.
     const appliedDiscount = discountSchedule[dateKey] || 0;
 
     // Base pricing data

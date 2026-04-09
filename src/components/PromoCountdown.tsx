@@ -1,32 +1,34 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 
-type PromoDay = {
-  isoDate: string;
+type PromoStep = {
+  startHour: number;
+  startMinute: number;
   discount: number;
 };
 
-const promoSchedule: PromoDay[] = [
-  { isoDate: "2026-04-13", discount: 35 },
-  { isoDate: "2026-04-14", discount: 30 },
-  { isoDate: "2026-04-15", discount: 29 },
-  { isoDate: "2026-04-16", discount: 28 },
-  { isoDate: "2026-04-17", discount: 27 },
-  { isoDate: "2026-04-18", discount: 26 },
-  { isoDate: "2026-04-19", discount: 25 },
+const promoSteps: PromoStep[] = [
+  { startHour: 10, startMinute: 10, discount: 35 },
+  { startHour: 10, startMinute: 30, discount: 30 },
+  { startHour: 10, startMinute: 50, discount: 29 },
+  { startHour: 11, startMinute: 10, discount: 28 },
+  { startHour: 11, startMinute: 30, discount: 27 },
+  { startHour: 11, startMinute: 50, discount: 26 },
+  { startHour: 12, startMinute: 10, discount: 25 },
 ];
 
 type CountdownState = {
-  status: "before" | "active" | "ended";
+  status: "before" | "active" | "final";
   discount: number;
   progress: number;
   secondsLeft: number;
   label: string;
 };
 
-const toStartDate = (isoDate: string) => {
-  const [year, month, day] = isoDate.split("-").map(Number);
-  return new Date(year, month - 1, day, 0, 0, 0, 0);
+const getMinuteOfDay = (hour: number, minute: number) => hour * 60 + minute;
+
+const formatStepTime = (hour: number, minute: number) => {
+  return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
 };
 
 const formatClock = (totalSeconds: number) => {
@@ -38,54 +40,54 @@ const formatClock = (totalSeconds: number) => {
 };
 
 const getCountdownState = (now: Date): CountdownState => {
-  const firstStart = toStartDate(promoSchedule[0].isoDate);
-  const lastStart = toStartDate(promoSchedule[promoSchedule.length - 1].isoDate);
-  const lastEnd = new Date(lastStart.getTime() + 24 * 60 * 60 * 1000);
+  const firstStep = promoSteps[0];
+  const firstStartMinute = getMinuteOfDay(firstStep.startHour, firstStep.startMinute);
+  const currentMinute = now.getHours() * 60 + now.getMinutes();
+  const currentSecondOfDay = currentMinute * 60 + now.getSeconds();
 
-  if (now < firstStart) {
-    const secondsLeft = Math.floor((firstStart.getTime() - now.getTime()) / 1000);
+  if (currentMinute < firstStartMinute) {
+    const firstStartSecond = firstStartMinute * 60;
+    const secondsLeft = Math.max(0, firstStartSecond - currentSecondOfDay);
     return {
       status: "before",
-      discount: promoSchedule[0].discount,
+      discount: firstStep.discount,
       progress: 1,
       secondsLeft,
       label: "Começa em",
     };
   }
 
-  if (now >= lastEnd) {
-    return {
-      status: "ended",
-      discount: 0,
-      progress: 0,
-      secondsLeft: 0,
-      label: "Promoção encerrada",
-    };
-  }
+  for (let i = 0; i < promoSteps.length; i++) {
+    const step = promoSteps[i];
+    const startMinute = getMinuteOfDay(step.startHour, step.startMinute);
+    const nextStep = promoSteps[i + 1];
+    const endMinute = nextStep
+      ? getMinuteOfDay(nextStep.startHour, nextStep.startMinute)
+      : null;
 
-  for (const day of promoSchedule) {
-    const start = toStartDate(day.isoDate);
-    const end = new Date(start.getTime() + 24 * 60 * 60 * 1000);
-    if (now >= start && now < end) {
-      const totalSeconds = 24 * 60 * 60;
-      const secondsLeft = Math.floor((end.getTime() - now.getTime()) / 1000);
+    if (endMinute !== null && currentMinute >= startMinute && currentMinute < endMinute) {
+      const startSecond = startMinute * 60;
+      const endSecond = endMinute * 60;
+      const totalSeconds = endSecond - startSecond;
+      const secondsLeft = Math.max(0, endSecond - currentSecondOfDay);
       const progress = Math.max(0, Math.min(1, secondsLeft / totalSeconds));
       return {
         status: "active",
-        discount: day.discount,
+        discount: step.discount,
         progress,
         secondsLeft,
-        label: "Termina em",
+        label: "Próxima troca em",
       };
     }
   }
 
+  const finalStep = promoSteps[promoSteps.length - 1];
   return {
-    status: "ended",
-    discount: 0,
-    progress: 0,
+    status: "final",
+    discount: finalStep.discount,
+    progress: 1,
     secondsLeft: 0,
-    label: "Promoção encerrada",
+    label: "Faixa final ativa",
   };
 };
 
@@ -93,7 +95,10 @@ export default function PromoCountdown() {
   const [now, setNow] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setNow(new Date()), 1000);
+    const getNowSp = () =>
+      new Date(new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+    setNow(getNowSp());
+    const timer = setInterval(() => setNow(getNowSp()), 1000);
     return () => clearInterval(timer);
   }, []);
 
@@ -113,13 +118,13 @@ export default function PromoCountdown() {
                 Countdown da promoção
               </p>
               <h3 className="text-3xl md:text-4xl font-black text-white leading-tight uppercase">
-                Desconto do dia acabando
+                Countdown da virada de desconto
               </h3>
               <p className="text-white/70 mt-4 text-base md:text-lg">
-                À meia-noite o percentual muda automaticamente para o próximo dia da campanha.
+                As faixas mudam automaticamente de 20 em 20 minutos: 35% → 30% → 29% → 28% → 27% → 26% → 25%.
               </p>
               <p className="mt-6 text-brand-yellow font-black text-xl md:text-2xl uppercase">
-                {countdown.label} {formatClock(countdown.secondsLeft)}
+                {countdown.label} {countdown.secondsLeft > 0 ? formatClock(countdown.secondsLeft) : ""}
               </p>
             </div>
 
@@ -158,21 +163,21 @@ export default function PromoCountdown() {
           </div>
 
           <div className="mt-10 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-3">
-            {promoSchedule.map((day) => {
-              const activeDay = countdown.status === "active" && countdown.discount === day.discount;
+            {promoSteps.map((step) => {
+              const activeStep = countdown.discount === step.discount && countdown.status !== "before";
               return (
                 <div
-                  key={day.isoDate}
+                  key={`${step.startHour}-${step.startMinute}-${step.discount}`}
                   className={`rounded-xl px-3 py-3 text-center border ${
-                    activeDay
+                    activeStep
                       ? "border-brand-yellow bg-brand-yellow/15"
                       : "border-white/10 bg-white/5"
                   }`}
                 >
                   <p className="text-[10px] uppercase tracking-widest text-white/60">
-                    {day.isoDate.slice(8, 10)}/{day.isoDate.slice(5, 7)}
+                    {formatStepTime(step.startHour, step.startMinute)}
                   </p>
-                  <p className="text-lg font-black text-white mt-1">{day.discount}%</p>
+                  <p className="text-lg font-black text-white mt-1">{step.discount}%</p>
                 </div>
               );
             })}
