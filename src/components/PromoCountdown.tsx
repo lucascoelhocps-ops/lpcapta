@@ -8,13 +8,13 @@ type PromoStep = {
 };
 
 const promoSteps: PromoStep[] = [
-  { startHour: 10, startMinute: 10, discount: 35 },
-  { startHour: 10, startMinute: 30, discount: 30 },
-  { startHour: 10, startMinute: 50, discount: 29 },
-  { startHour: 11, startMinute: 10, discount: 28 },
-  { startHour: 11, startMinute: 30, discount: 27 },
-  { startHour: 11, startMinute: 50, discount: 26 },
-  { startHour: 12, startMinute: 10, discount: 25 },
+  { startHour: 14, startMinute: 10, discount: 35 },
+  { startHour: 14, startMinute: 30, discount: 30 },
+  { startHour: 14, startMinute: 50, discount: 29 },
+  { startHour: 15, startMinute: 10, discount: 28 },
+  { startHour: 15, startMinute: 30, discount: 27 },
+  { startHour: 15, startMinute: 50, discount: 26 },
+  { startHour: 16, startMinute: 10, discount: 25 },
 ];
 
 type CountdownState = {
