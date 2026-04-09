@@ -805,9 +805,9 @@
             <img src="/logopages2.png" alt="Logo Ratoeira Pages" class="absolute top-6 right-6 w-10 h-10 object-contain opacity-40 group-hover:opacity-100 transition-opacity" />
             <h3 class="text-lg mb-1 text-white">Pages Ratazana Plus <span class="text-[10px] block text-brand-yellow uppercase mt-1">Anual</span></h3>
             <div class="my-6">
-              <span class="text-[10px] font-black text-white/30 uppercase tracking-widest block mb-1">Parcelado</span>
+              <span class="text-[10px] font-black text-white/60 uppercase tracking-widest block mb-1">Parcelado</span>
               <span class="text-4xl text-brand-yellow font-black block leading-none mb-3" data-price-parcel-calc data-calc-bundle="pages" data-calc-period="anual" data-calc-plan="ratazana-plus">12x R$ [VALOR]</span>
-              <div class="text-[11px] font-black text-brand-dark/60 bg-brand-yellow/10 px-3 py-1.5 rounded-full inline-block uppercase tracking-wider">
+              <div class="text-[11px] font-black text-white bg-brand-yellow/25 border border-brand-yellow/40 px-3 py-1.5 rounded-full inline-block uppercase tracking-wider">
                 ou <span data-price-calc data-calc-bundle="pages" data-calc-period="anual" data-calc-plan="ratazana-plus">R$ [VALOR]</span> à vista
               </div>
             </div>
@@ -1362,7 +1362,7 @@
       const parcelPrefix = periodAttr === 'anual' ? '12x ' : periodAttr === 'semestral' ? '6x ' : '';
       const card = (el as HTMLElement).closest('.relative');
       const isDarkCard = card?.classList.contains('bg-black');
-      const strikeClass = isDarkCard ? 'text-white/30' : 'text-brand-dark/40';
+      const strikeClass = isDarkCard ? 'text-white/60' : 'text-brand-dark/40';
 
       if (baseParcelPrice !== null && parcelPrice < baseParcelPrice) {
         el.innerHTML = `<span class="text-sm ${strikeClass} line-through block mb-1">${parcelPrefix}R$ ${baseParcelPrice.toFixed(2).replace('.',',')}</span>${parcelPrefix}R$ ${parcelPrice.toFixed(2).replace('.',',')}`;
@@ -1384,7 +1384,7 @@
       const discountedPrice = getEffectivePrice(bundleAttr, periodAttr, planAttr, basePrice);
       const card = (el as HTMLElement).closest('.relative');
       const isDarkCard = card?.classList.contains('bg-black');
-      const strikeClass = isDarkCard ? 'text-white/40' : 'text-brand-dark/35';
+      const strikeClass = isDarkCard ? 'text-white/60' : 'text-brand-dark/35';
 
       if (discountedPrice < basePrice) {
         el.innerHTML = `<span class="text-sm ${strikeClass} line-through block mb-1">R$ ${basePrice.toFixed(2).replace('.',',')}</span>R$ ${discountedPrice.toFixed(2).replace('.',',')}`;
@@ -1448,7 +1448,7 @@
       const baseParcelPrice = baseParcelPriceMap[bundle];
       const card = (el as HTMLElement).closest('.relative');
       const isDarkCard = card?.classList.contains('bg-black');
-      const strikeClass = isDarkCard ? 'text-white/30' : 'text-brand-dark/40';
+      const strikeClass = isDarkCard ? 'text-white/60' : 'text-brand-dark/40';
 
       if (parcelPrice < baseParcelPrice) {
         el.innerHTML = `<span class="text-sm ${strikeClass} line-through block mb-1">12x R$ ${baseParcelPrice.toFixed(2).replace('.',',')}</span>12x R$ ${parcelPrice.toFixed(2).replace('.',',')}`;
