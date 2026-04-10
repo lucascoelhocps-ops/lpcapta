@@ -9,7 +9,6 @@ import ProductDemo from '../components/ProductDemo.astro';
 import HighConversionFeatures from '../components/HighConversionFeatures.astro';
 import ResultsOnStatement from '../components/ResultsOnStatement.astro';
 import ChainCarousel from '../components/ChainCarousel';
-import PromoCountdown from '../components/PromoCountdown.tsx';
 import FAQ from '../components/FAQ.tsx';
 import Footer from '../components/Footer.astro';
 
@@ -35,7 +34,6 @@ const platforms = [
   <main>
     <Hero />
     <SocialProof />
-    <PromoCountdown client:visible />
     <Pricing />
     <SocialProofMarquee />
     <ProductDemo />
@@ -44,19 +42,5 @@ const platforms = [
     <ResultsOnStatement />
     <FAQ client:visible />
   </main>
-  <a
-    href="https://api.whatsapp.com/send/?phone=5519997278153&text=Ol%C3%A1%2C+vim+do+site+e+quero+falar+com+um+atendente&type=phone_number&app_absent=0"
-    target="_blank"
-    rel="noopener noreferrer"
-    aria-label="Falar no WhatsApp"
-    class="fixed right-4 bottom-5 md:right-6 md:bottom-6 z-[130] hover:scale-105 transition-transform"
-  >
-    <img
-      src="/toppng.com-logo-icono-whatsapp-whatsa-465x465.png"
-      alt="WhatsApp"
-      class="w-14 h-14 md:w-16 md:h-16 drop-shadow-[0_18px_35px_rgba(37,211,102,0.45)]"
-      loading="lazy"
-    />
-  </a>
   <Footer />
 </Layout>
