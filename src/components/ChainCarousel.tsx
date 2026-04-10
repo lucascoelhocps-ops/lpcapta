@@ -67,17 +67,20 @@ const CarouselItemCard: React.FC<CarouselItemProps> = ({ chain, side }) => {
     // Cores do projeto: Amarelo (#FFB800) para o lado direito, Laranja (#FF4D00) para o lado esquerdo
     const iconColor = side === 'right' ? '#FFB800' : '#FF4D00';
 
-    const IconOrLogo = ( 
-        <div 
+    const IconOrLogo = logo ? (
+        <div
+            className="w-12 h-12 rounded-full border bg-white shadow-lg p-1.5 flex items-center justify-center overflow-hidden"
+            style={{ borderColor: iconColor }}
+        >
+            <img src={logo} alt={`${name} logo`} className="w-full h-full object-contain rounded-full" />
+        </div>
+    ) : (
+        <div
             className="rounded-full border border-muted-foreground/60 dark:border-muted-foreground/40 p-2 bg-foreground shadow-lg"
             style={{ borderColor: iconColor }}
-        > 
-            {logo ? ( 
-                <img src={logo} alt={`${name} logo`} className="size-8 rounded-full object-cover" /> 
-            ) : ( 
-                <FallbackIcon className="size-8 text-background" style={{ color: iconColor }} /> 
-            )} 
-        </div> 
+        >
+            <FallbackIcon className="size-8 text-background" style={{ color: iconColor }} />
+        </div>
     ); 
 
     return ( 
@@ -230,35 +233,30 @@ const ChainCarousel: React.FC<ChainCarouselProps> = ({
                 </motion.div> 
  
                 {/* Middle Section - Text and Search Input */} 
-                <div className="flex flex-col text-center gap-4 max-w-md z-20"> 
-                    <h2 className="text-3xl lg:text-5xl font-black text-brand-dark uppercase tracking-tighter mb-2 leading-[0.9]">
-                        CONECTA COM <br />
-                        <span className="text-brand-yellow italic">TUDO</span> QUE VOCÊ JÁ USA
+                <div className="flex flex-col text-center gap-4 w-full max-w-3xl xl:max-w-4xl mx-auto z-20"> 
+                    <h2 className="text-2xl sm:text-3xl lg:text-4xl xl:text-5xl font-black text-brand-dark uppercase tracking-tighter mb-2 leading-tight">
+                        CONECTA COM <span className="text-brand-yellow italic">TUDO</span> QUE VOCÊ JÁ USA
                     </h2>
                     <div className="space-y-2 mb-6">
                         <p className="text-sm lg:text-lg text-brand-dark font-black uppercase tracking-tight">
                             Mais de 70 plataformas.
                         </p>
-                        <p className="text-xs lg:text-sm text-gray-500 font-bold uppercase tracking-widest leading-relaxed">
-                            Conexão em minutos. Zero retrabalho. <br />
-                            Seus checkouts, plataformas de afiliados e redes conectados de uma vez. Uma configuração, rastreamento de tudo.
+                        <p className="text-[11px] lg:text-sm text-gray-500 font-semibold tracking-normal leading-relaxed">
+                            <span className="block">Conexão em minutos. Zero retrabalho.</span>
+                            <span className="block">Seus checkouts, plataformas de afiliados e redes conectados de uma vez.</span>
                         </p>
                     </div>
 
                     {/* Currently Selected Item Display */} 
                     {currentItem && ( 
-                        <div className="flex flex-col items-center justify-center gap-0 mt-4 bg-brand-dark p-8 rounded-3xl shadow-2xl border-b-4 border-brand-yellow"> 
-                            <div className='p-3 bg-white rounded-full mb-4 shadow-lg'> 
+                        <div className="flex flex-col items-center justify-center mt-4"> 
+                            <div className='p-3 bg-white rounded-full shadow-lg'> 
                                 {currentItem.logo ? ( 
-                                    <img src={currentItem.logo} alt={`${currentItem.name} logo`} className="size-16 rounded-full object-cover" /> 
+                                    <img src={currentItem.logo} alt={`${currentItem.name} logo`} className="size-16 object-contain rounded-full" /> 
                                 ) : ( 
                                     <CurrentItemIcon className="size-16 text-brand-yellow" /> 
                                 )} 
                             </div> 
-                            <h3 className="text-2xl font-black text-white uppercase tracking-tighter"> 
-                                {currentItem.name} 
-                            </h3> 
-                            <p className="text-xs font-bold text-brand-yellow uppercase tracking-[0.2em] mt-2">{currentItem.details || 'CONECTADO'}</p> 
                         </div> 
                     )} 
  
@@ -325,13 +323,40 @@ const ChainCarousel: React.FC<ChainCarouselProps> = ({
                                 })} 
                             </div> 
                         )} 
-                    </div> 
-                </div> 
+                    </div>
+
+                    {/* Mobile only: marquee infinito de logos */}
+                    <div className="xl:hidden w-full overflow-hidden mt-6">
+                        <style>{`
+                            @keyframes marquee-left {
+                                0%   { transform: translateX(0); }
+                                100% { transform: translateX(-50%); }
+                            }
+                            .marquee-track-l { animation: marquee-left 70s linear infinite; }
+                        `}</style>
+
+                        <div className="relative flex overflow-hidden">
+                            <div className="absolute left-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-r from-white to-transparent pointer-events-none" />
+                            <div className="absolute right-0 top-0 bottom-0 w-12 z-10 bg-gradient-to-l from-white to-transparent pointer-events-none" />
+                            <div className="flex gap-3 marquee-track-l">
+                                {[...items, ...items].map((item, i) => (
+                                    <div key={`ml-${i}`} className="flex items-center gap-2 bg-gray-50 border border-gray-100 rounded-full px-3 py-2 shrink-0">
+                                        {item.logo
+                                            ? <img src={item.logo} alt={item.name} className="w-6 h-6 rounded-full object-contain" />
+                                            : <Globe className="w-5 h-5 text-brand-yellow" />
+                                        }
+                                        <span className="text-[11px] font-black text-brand-dark uppercase tracking-tight whitespace-nowrap">{item.name}</span>
+                                    </div>
+                                ))}
+                            </div>
+                        </div>
+                    </div>
+                </div>
  
                 {/* Right Section - Chain Carousel (Yellow) */} 
                 <motion.div 
                     ref={rightSectionRef} 
-                    className="relative w-full max-w-md xl:max-w-2xl h-[450px] flex items-center justify-center -right-14" 
+                    className="hidden xl:flex relative w-full max-w-md xl:max-w-2xl h-[450px] items-center justify-center -right-14" 
                     onMouseEnter={() => !searchTerm && setIsPaused(true)} 
                     onMouseLeave={() => !searchTerm && setIsPaused(false)} 
                     initial={{ x: '100%', opacity: 0 }} 
@@ -351,9 +376,10 @@ const ChainCarousel: React.FC<ChainCarouselProps> = ({
                         /> 
                     ))} 
                 </motion.div> 
-            </div> 
-        </div > 
+            </div>
+
+        </div> 
     ); 
 }; 
-
+ 
 export default ChainCarousel; 

@@ -31,16 +31,18 @@ export const TextHoverEffect = ({
   }, [cursor]);
 
   return (
+    <div
+      className={cn("w-full h-full select-none uppercase cursor-pointer group", className)}
+      onMouseEnter={() => setHovered(true)}
+      onMouseLeave={() => setHovered(false)}
+      onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
+    >
     <svg
       ref={svgRef}
       width="100%"
       height="100%"
-      viewBox="0 0 300 100"
+      viewBox="0 0 800 100"
       xmlns="http://www.w3.org/2000/svg"
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      onMouseMove={(e) => setCursor({ x: e.clientX, y: e.clientY })}
-      className={cn("select-none uppercase cursor-pointer", className)}
     >
       <defs>
         <linearGradient
@@ -48,7 +50,7 @@ export const TextHoverEffect = ({
           gradientUnits="userSpaceOnUse"
           cx="50%"
           cy="50%"
-          r="25%"
+          r="35%"
         >
           <stop offset="0%" stopColor="#FFB800" />
           <stop offset="25%" stopColor="#FFD54A" />
@@ -60,7 +62,7 @@ export const TextHoverEffect = ({
         <motion.radialGradient
           id="revealMask"
           gradientUnits="userSpaceOnUse"
-          r="20%"
+          r="28%"
           initial={{ cx: "50%", cy: "50%" }}
           animate={maskPosition}
           transition={{ duration: duration ?? 0, ease: "easeOut" }}
@@ -83,9 +85,13 @@ export const TextHoverEffect = ({
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        strokeWidth="0.3"
-        className="fill-transparent stroke-neutral-200 font-[helvetica] text-6xl font-bold dark:stroke-neutral-800"
-        style={{ opacity: hovered ? 0.8 : 0.3 }}
+        strokeWidth="1.6"
+        className="fill-transparent font-['Montserrat'] text-[6rem] md:text-[7rem] lg:text-[8rem] font-bold tracking-normal"
+        stroke="#FFB80066"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        vectorEffect="non-scaling-stroke"
+        style={{ opacity: 1 }}
       >
         {text}
       </text>
@@ -94,9 +100,12 @@ export const TextHoverEffect = ({
         y="50%"
         textAnchor="middle"
         dominantBaseline="middle"
-        strokeWidth="0.3"
-        className="fill-transparent stroke-brand-yellow font-[helvetica] text-6xl font-bold 
-        dark:stroke-[#FFB80099]"
+        strokeWidth="2"
+        className="fill-transparent font-['Montserrat'] text-[6rem] md:text-[7rem] lg:text-[8rem] font-bold tracking-normal opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        stroke="#FFB800"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        vectorEffect="non-scaling-stroke"
         initial={{ strokeDashoffset: 1000, strokeDasharray: 1000 }}
         animate={{
           strokeDashoffset: 0,
@@ -106,6 +115,7 @@ export const TextHoverEffect = ({
           duration: 4,
           ease: "easeInOut",
         }}
+        style={{ opacity: hovered ? 1 : 0 }}
       >
         {text}
       </motion.text>
@@ -115,14 +125,20 @@ export const TextHoverEffect = ({
         textAnchor="middle"
         dominantBaseline="middle"
         stroke="url(#textGradient)"
-        strokeWidth={hovered ? "0.8" : "0.5"}
-        mask="url(#textMask)"
-        className="fill-transparent font-[helvetica] text-6xl font-bold"
-        style={{ filter: hovered ? "drop-shadow(0 0 10px #FFB800)" : "drop-shadow(0 0 5px #FFB800)" }}
+        strokeWidth="2"
+        className="fill-transparent font-['Montserrat'] text-[6rem] md:text-[7rem] lg:text-[8rem] font-bold tracking-normal opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        vectorEffect="non-scaling-stroke"
+        style={{
+          opacity: hovered ? 1 : 0,
+          filter: hovered ? "drop-shadow(0 0 10px #FFB800) drop-shadow(0 0 28px #FFB800)" : "none",
+        }}
       >
         {text}
       </text>
     </svg>
+    </div>
   );
 };
 
@@ -130,10 +146,10 @@ export const TextHoverEffect = ({
 export const FooterBackgroundGradient = () => {
   return (
     <div
-      className="absolute inset-0 z-0"
+      className="absolute inset-0 z-0 bg-black"
       style={{
-        background:
-          "radial-gradient(125% 125% at 50% 10%, #0F0F1166 50%, #FFB80022 100%)",
+        background: "#000000",
+        pointerEvents: "none",
       }}
     />
   );

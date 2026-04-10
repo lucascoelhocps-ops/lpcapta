@@ -6,12 +6,8 @@ import {
   MapPin,
   Facebook,
   Instagram,
-  Twitter,
-  ExternalLink,
-  ShieldCheck,
-  Zap
+  Twitter
 } from "lucide-react";
-import { FooterBackgroundGradient, TextHoverEffect } from "./ui/hover-footer";
 
 function Footer() {
   return (
@@ -22,7 +18,9 @@ function Footer() {
           {/* Section: Ratoeira ADS */}
           <div className="flex flex-col space-y-6">
             <div className="flex items-center space-x-2">
-              <ShieldCheck className="text-brand-yellow" size={32} />
+              <div className="w-10 h-10 rounded-full bg-white p-1 flex items-center justify-center">
+                <img src="/logoraads2.png" alt="Logo Ratoeira ADS" className="w-full h-full object-contain" />
+              </div>
               <span className="text-white text-2xl font-black tracking-tight">Ratoeira <span className="text-brand-yellow">ADS</span></span>
             </div>
             <p className="text-sm leading-relaxed text-white/60">
@@ -41,7 +39,9 @@ function Footer() {
           {/* Section: Ratoeira PAGES */}
           <div className="flex flex-col space-y-6">
             <div className="flex items-center space-x-2">
-              <Zap className="text-orange-500" size={32} />
+              <div className="w-10 h-10 rounded-full bg-white p-1 flex items-center justify-center">
+                <img src="/logopages2.png" alt="Logo Ratoeira PAGES" className="w-full h-full object-contain" />
+              </div>
               <span className="text-white text-2xl font-black tracking-tight">Ratoeira <span className="text-orange-500">PAGES</span></span>
             </div>
             <p className="text-sm leading-relaxed text-white/60">
@@ -108,12 +108,6 @@ function Footer() {
 
         <hr className="border-t border-white/10" />
       </div>
-
-      <div className="flex h-[9rem] md:h-[13rem] lg:h-[16rem] mt-2 md:mt-4 -mb-6 md:-mb-10 lg:-mb-14 relative z-50">
-        <TextHoverEffect text="RATOEIRA" className="w-full h-full" />
-      </div>
-
-      <FooterBackgroundGradient />
     </footer>
   );
 }

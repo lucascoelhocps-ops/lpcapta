@@ -26,21 +26,31 @@
     </div>
 
     <!-- Video Container com Glow Premium -->
-    <div class="relative group/video max-w-4xl mx-auto reveal-on-scroll" style="animation-delay: 200ms;">
+    <div class="relative group/video max-w-[400px] mx-auto reveal-on-scroll" style="animation-delay: 200ms;">
       <!-- Outer glow effect -->
-      <div class="absolute -inset-1.5 bg-linear-to-r from-brand-yellow/40 to-yellow-500/20 rounded-2xl blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
+      <div class="absolute -inset-1.5 bg-linear-to-r from-brand-yellow/40 to-yellow-500/20 rounded-[2rem] blur-xl opacity-20 group-hover:opacity-40 transition-opacity duration-500"></div>
       
       <!-- Video Wrapper -->
-      <div class="relative rounded-2xl overflow-hidden aspect-video bg-brand-darker border-4 border-white/5 shadow-[0_30px_100px_rgba(0,0,0,0.6)]">
-        <iframe 
-          class="w-full h-full"
-          src="https://www.youtube.com/embed/iG3RtYyQ8qI" 
-          title="Como Funciona Ratoeira Ads" 
-          frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          referrerpolicy="strict-origin-when-cross-origin" 
-          allowfullscreen>
-        </iframe>
+      <div id="video-wrapper" class="relative rounded-[2rem] overflow-hidden aspect-[9/16] bg-brand-darker border-4 border-white/10 shadow-[0_30px_100px_rgba(0,0,0,0.6)] cursor-pointer group">
+        
+        <!-- Capa do Vídeo -->
+        <div id="video-cover" class="absolute inset-0 z-10 bg-black flex items-center justify-center transition-opacity duration-500">
+          <img src="/assets/capa_ceo.jpg" alt="Mensagem Especial do CEO" class="absolute inset-0 w-full h-full object-cover opacity-90 group-hover:scale-105 transition-transform duration-700" />
+          
+          <!-- Botão Play Overlay -->
+          <div class="relative z-20 w-16 h-16 md:w-20 md:h-20 bg-brand-yellow/90 backdrop-blur-sm rounded-full flex items-center justify-center shadow-[0_0_30px_rgba(255,184,0,0.5)] group-hover:scale-110 transition-transform duration-300">
+            <svg class="w-8 h-8 md:w-10 md:h-10 text-brand-dark ml-1.5 md:ml-2" fill="currentColor" viewBox="0 0 20 20"><path d="M4 4l12 6-12 6z"></path></svg>
+          </div>
+        </div>
+
+        <video 
+          id="demo-video"
+          class="w-full h-full object-cover opacity-0 transition-opacity duration-500 bg-black"
+          playsinline
+          controls
+          preload="metadata">
+          <source src="/videoniver.mp4" type="video/mp4" />
+        </video>
       </div>
       
       <!-- Decorative tech element -->
@@ -59,6 +69,36 @@
 
   </div>
 </section>
+
+<script is:inline>
+  (function() {
+    const initVideo = () => {
+      const wrapper = document.getElementById('video-wrapper');
+      const cover = document.getElementById('video-cover');
+      const video = document.getElementById('demo-video');
+
+      if (wrapper && cover && video) {
+        // Usa cloneNode para remover event listeners antigos se rodar no astro:after-swap
+        const newWrapper = wrapper.cloneNode(true);
+        wrapper.parentNode.replaceChild(newWrapper, wrapper);
+        
+        const newCover = newWrapper.querySelector('#video-cover');
+        const newVideo = newWrapper.querySelector('#demo-video');
+
+        newWrapper.addEventListener('click', () => {
+          if (!newCover.classList.contains('pointer-events-none')) {
+            newCover.classList.add('opacity-0', 'pointer-events-none');
+            newVideo.classList.remove('opacity-0');
+            newVideo.play().catch(e => console.error("Auto-play prevented", e));
+          }
+        });
+      }
+    };
+
+    initVideo();
+    document.addEventListener('astro:after-swap', initVideo);
+  })();
+</script>
 
 <style>
   /* Reveal Animation */

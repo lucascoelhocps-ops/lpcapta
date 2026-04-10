@@ -8,13 +8,13 @@ type PromoStep = {
 };
 
 const promoSteps: PromoStep[] = [
-  { startHour: 9, startMinute: 5, discount: 35 },
-  { startHour: 9, startMinute: 15, discount: 30 },
-  { startHour: 9, startMinute: 25, discount: 29 },
-  { startHour: 9, startMinute: 35, discount: 28 },
-  { startHour: 9, startMinute: 45, discount: 27 },
-  { startHour: 9, startMinute: 55, discount: 26 },
-  { startHour: 10, startMinute: 5, discount: 25 },
+  { startHour: 16, startMinute: 0, discount: 35 },
+  { startHour: 16, startMinute: 5, discount: 30 },
+  { startHour: 16, startMinute: 10, discount: 29 },
+  { startHour: 16, startMinute: 15, discount: 28 },
+  { startHour: 16, startMinute: 20, discount: 27 },
+  { startHour: 16, startMinute: 25, discount: 26 },
+  { startHour: 16, startMinute: 30, discount: 25 },
 ];
 
 type CountdownState = {
@@ -24,6 +24,8 @@ type CountdownState = {
   secondsLeft: number;
   label: string;
 };
+
+const getMinuteOfDay = (hour: number, minute: number) => hour * 60 + minute;
 
 const formatStepTime = (hour: number, minute: number) => {
   return `${String(hour).padStart(2, "0")}:${String(minute).padStart(2, "0")}`;
@@ -37,10 +39,12 @@ const formatClock = (totalSeconds: number) => {
   return [h, m, s].map((v) => String(v).padStart(2, "0")).join(":");
 };
 
-const getCountdownState = (elapsedSeconds: number): CountdownState => {
-  const stepDuration = 10 * 60;
+const getCountdownState = (now: Date): CountdownState => {
+  const currentMinute = now.getHours() * 60 + now.getMinutes();
+  const currentSecondOfDay = currentMinute * 60 + now.getSeconds();
+  const stepDuration = 5 * 60;
   const cycleDuration = promoSteps.length * stepDuration;
-  const cycleSecond = elapsedSeconds % cycleDuration;
+  const cycleSecond = currentSecondOfDay % cycleDuration;
   const currentStepIndex = Math.floor(cycleSecond / stepDuration);
   const secondsIntoStep = cycleSecond % stepDuration;
   const secondsLeft = stepDuration - secondsIntoStep;
@@ -55,18 +59,17 @@ const getCountdownState = (elapsedSeconds: number): CountdownState => {
 };
 
 export default function PromoCountdown() {
-  const [startAtMs] = useState(() => Date.now());
-  const [nowMs, setNowMs] = useState(() => Date.now());
+  const [now, setNow] = useState(new Date());
 
   useEffect(() => {
-    const timer = setInterval(() => setNowMs(Date.now()), 1000);
+    const getNowSp = () =>
+      new Date(new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+    setNow(getNowSp());
+    const timer = setInterval(() => setNow(getNowSp()), 1000);
     return () => clearInterval(timer);
   }, []);
 
-  const countdown = useMemo(() => {
-    const elapsedSeconds = Math.floor((nowMs - startAtMs) / 1000);
-    return getCountdownState(Math.max(0, elapsedSeconds));
-  }, [nowMs, startAtMs]);
+  const countdown = useMemo(() => getCountdownState(now), [now]);
 
   const radius = 84;
   const circumference = 2 * Math.PI * radius;
@@ -77,14 +80,11 @@ export default function PromoCountdown() {
       <div className="flex flex-col lg:flex-row items-center justify-between gap-4">
         <div className="text-center lg:text-left">
           <p className="text-brand-yellow font-black uppercase tracking-[0.16em] text-[10px] mb-2">
-            Countdown da promoção
+            PROMOÇÃO 2 ANOS DE RATOEIRA
           </p>
           <h3 className="text-xl md:text-2xl font-black text-white leading-tight uppercase">
             Countdown da virada de desconto
           </h3>
-          <p className="text-white/70 mt-1.5 text-xs md:text-sm">
-            As faixas mudam automaticamente de 10 em 10 minutos: 35% → 30% → 29% → 28% → 27% → 26% → 25%.
-          </p>
           <p className="mt-3 text-brand-yellow font-black text-base md:text-lg uppercase">
             {countdown.label} {countdown.secondsLeft > 0 ? formatClock(countdown.secondsLeft) : ""}
           </p>
@@ -124,7 +124,26 @@ export default function PromoCountdown() {
         </div>
       </div>
 
-      <div className="mt-4 grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-2">
+      {/* Mobile: só o card ativo */}
+      <div className="mt-4 block md:hidden">
+        {promoSteps
+          .filter((step) => countdown.discount === step.discount)
+          .map((step) => (
+            <div
+              key={`mobile-${step.startHour}-${step.startMinute}`}
+              className="rounded-xl px-4 py-3 text-center border border-brand-yellow bg-brand-yellow/15 w-full"
+            >
+              <p className="text-[9px] uppercase tracking-widest text-white/60 mb-1">
+                {formatStepTime(step.startHour, step.startMinute)}
+              </p>
+              <p className="text-2xl font-black text-brand-yellow">{step.discount}% OFF</p>
+              <p className="text-[10px] uppercase tracking-widest text-white/50 mt-1">Desconto atual</p>
+            </div>
+          ))}
+      </div>
+
+      {/* Desktop: todos os 7 cards */}
+      <div className="mt-4 hidden md:grid md:grid-cols-4 lg:grid-cols-7 gap-2">
         {promoSteps.map((step) => {
           const activeStep = countdown.discount === step.discount && countdown.status !== "before";
           return (
@@ -144,6 +163,7 @@ export default function PromoCountdown() {
           );
         })}
       </div>
+
     </div>
   );
 }
